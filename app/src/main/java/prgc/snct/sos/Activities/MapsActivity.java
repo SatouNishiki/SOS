@@ -1,4 +1,4 @@
-package prgc.snct.sos;
+package prgc.snct.sos.Activities;
 
 import android.content.Context;
 import android.location.Criteria;
@@ -14,6 +14,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import prgc.snct.sos.R;
 
 public class MapsActivity extends FragmentActivity implements LocationListener{
 
@@ -73,13 +75,13 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
         Criteria criteria = new Criteria();
 
-        // Accuracyを指定(低精度)
+        // Accuracy Settings(Low Level)
         criteria.setAccuracy(Criteria.ACCURACY_COARSE);
 
-        // PowerRequirementを指定(低消費電力)
+        // PowerRequirement Setting (Low Power)
         criteria.setPowerRequirement(Criteria.POWER_LOW);
 
-        // ロケーションプロバイダの取得
+        // Location Provider Getting
         String provider = mLocationManager.getBestProvider(criteria, true);
 
         mLocationManager.requestLocationUpdates(provider, 0, 0, this);

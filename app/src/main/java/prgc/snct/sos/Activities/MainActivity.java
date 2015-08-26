@@ -1,4 +1,4 @@
-package prgc.snct.sos;
+package prgc.snct.sos.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import prgc.snct.sos.R;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
@@ -47,7 +49,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v.getId() == R.id.button){
             Intent intent = new Intent();
-            intent.setClassName("prgc.snct.sos", "prgc.snct.sos.MapsActivity");
+            intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.MapsActivity");
             startActivity(intent);
         }
     }
