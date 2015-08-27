@@ -14,8 +14,8 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
         android:allowBackup="true"
@@ -46,15 +46,15 @@
         <activity
             android:name=".Activities.BluetoothMain"
             android:label="@string/title_activity_bluetooth_main" >
-            <intent-filter>
-                <action android:name="android.intent.action.BluetoothMAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
 
         </activity>
         <activity
             android:name=".Activities.DeviceListActivity"
             android:label="@string/title_activity_device_list" >
+        </activity>
+        <activity
+            android:name=".Activities.DatabaseMain"
+            android:label="@string/title_activity_database_main" >
         </activity>
     </application>
 

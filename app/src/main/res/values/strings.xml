@@ -26,4 +26,5 @@
     <string name="insecure_connect">Connect a device - Insecure</string>
     <string name="discoverable">Make discoverable</string>
     <string name="title_activity_device_list">DeviceListActivity</string>
+    <string name="title_activity_database_main">DatabaseMain</string>
 </resources>

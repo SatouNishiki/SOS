@@ -48,9 +48,23 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button){
+
             Intent intent = new Intent();
             intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.MapsActivity");
             startActivity(intent);
+
+        }else if(v.getId() == R.id.button2){
+
+            Intent intent = new Intent();
+            intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.BluetoothMain");
+            startActivity(intent);
+
+        }else if(v.getId() == R.id.button3) {
+
+            Intent intent = new Intent();
+            intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
+            startActivity(intent);
+
         }
     }
 }
