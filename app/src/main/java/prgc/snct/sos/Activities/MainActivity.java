@@ -18,9 +18,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button button = (Button)findViewById(R.id.button);
+        Button button2 = (Button)findViewById(R.id.button2);
+        Button button3 = (Button)findViewById(R.id.button3);
+
         button.setOnClickListener(this);
+        button2.setOnClickListener(this);
+        button3.setOnClickListener(this);
     }
 
     @Override
@@ -49,20 +53,20 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v.getId() == R.id.button){
 
-            Intent intent = new Intent();
-            intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.MapsActivity");
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            //intent.setClassName("sos.Activities", "sos.Activities.MapsActivity");
             startActivity(intent);
 
         }else if(v.getId() == R.id.button2){
 
-            Intent intent = new Intent();
-            intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.BluetoothMain");
+            Intent intent = new Intent(MainActivity.this,BluetoothMain.class);
+            //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.BluetoothMain");
             startActivity(intent);
 
         }else if(v.getId() == R.id.button3) {
 
-            Intent intent = new Intent();
-            intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
+            Intent intent = new Intent(MainActivity.this,DatabaseMain.class);
+            //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
             startActivity(intent);
 
         }
