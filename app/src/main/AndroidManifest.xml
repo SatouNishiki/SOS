@@ -56,6 +56,13 @@
             android:name=".Activities.DatabaseMain"
             android:label="@string/title_activity_database_main" >
         </activity>
+        <activity
+            android:name=".Activities.ActivityService"
+            android:label="@string/app_name" >
+
+        </activity>
+
+        <service android:name=".Activities.TryService"></service>
     </application>
 
 </manifest>
