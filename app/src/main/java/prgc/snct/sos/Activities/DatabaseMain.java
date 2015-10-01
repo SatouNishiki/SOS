@@ -36,6 +36,7 @@ public class DatabaseMain extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LinearLayout layout = new LinearLayout(this);
+
         layout.setOrientation(LinearLayout.VERTICAL);
         setContentView(layout);
         final Handler handler=new Handler();

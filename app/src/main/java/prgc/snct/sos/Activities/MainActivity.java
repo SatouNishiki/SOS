@@ -1,9 +1,12 @@
 package prgc.snct.sos.Activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +17,8 @@ import prgc.snct.sos.R;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +28,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button button3 = (Button)findViewById(R.id.button3);
         Button button4 = (Button)findViewById(R.id.button4);
 
+        showDialog(1);
         button.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
@@ -50,6 +56,37 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+
+            case 1:
+
+                //レイアウトの呼び出し
+                LayoutInflater factory = LayoutInflater.from(this);
+                final View inputView = factory.inflate(R.layout.input_dialog, null);
+
+                //ダイアログの作成(AlertDialog.Builder)
+                return new AlertDialog.Builder(MainActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("name")
+                    .setView(inputView)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+
+                    /* int whichButton により、押されたボタンを判定 */
+                    /* 受付処理 ：入力されたテキストの処理など */
+                        }
+                    })
+
+                        .create();
+        }
+
+        return null;
+    }
+
+
 
     @Override
     public void onClick(View v) {
