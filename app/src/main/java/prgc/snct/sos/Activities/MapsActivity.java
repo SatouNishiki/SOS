@@ -42,13 +42,13 @@ import android.widget.Toast;
 public class MapsActivity extends FragmentActivity implements LocationListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public double xpojia=0.0;//���p�n�_�p�ܓx
-    public double xpojib=0.0;//���p�n�_�p�o�x
+    public double xpojia=0.0;//中継地点用緯度
+    public double xpojib=0.0;//中継地点用経度
 
     public static String posinfo = "";
     public static String info_A = "";
     public static String info_B = "";
-    LatLng old=new LatLng(0,0);//�^�b�v�ʒu�L���p
+    LatLng old=new LatLng(0,0);//タップ位置記憶用
     ArrayList<LatLng> markerPoints;
 
     public static MarkerOptions options;
@@ -56,8 +56,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     public ProgressDialog progressDialog;
 
     public String travelMode = "driving";//default
-    LatLng curr = new LatLng(0,0);//�~�����s�҂̈ʒu���
-    //LatLng bhelp = new LatLng(bhelpx,bhelpy);//�v�~���҂̈ʒu���
+    LatLng curr = new LatLng(0,0);//救助実行者の位置情報
+    //LatLng bhelp = new LatLng(bhelpx,bhelpy);//要救助者の位置情報
 
     int startup=0;
     @Override
@@ -71,43 +71,43 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         progressDialog.hide();
 
 
-        //������
+        //初期化
         markerPoints = new ArrayList<LatLng>();
         if(mMap!=null){
 
             mMap.setMyLocationEnabled(true);
 
-            //�N���b�N���X�i�[
+            //クリックリスナー
             mMap.setOnMapClickListener(new OnMapClickListener() {
                 @Override
-                //��ʃN���b�N�Ń��[�g����(���̓^�b�v�����ʒu�j
+                //画面クリックでルート検索(今はタップした位置）
                 public void onMapClick(LatLng point) {
-                    //�O��ڂ̃^�b�v�Ń��Z�b�g
+                    //三回目のタップでリセット
                     if(markerPoints.size()>1){
                         markerPoints.clear();
                         mMap.clear();
                     }
-                    //���ڂ̃^�b�v���ɋ����[�g�폜
+                    //二回目のタップ時に旧ルート削除
                     if(markerPoints.size()==1)
                     {
                         mMap.clear();
                         options = new MarkerOptions();
                         options.position(old);
                         options.title("A");
-                         mMap.addMarker(options);
+                        mMap.addMarker(options);
                     }
 
                     markerPoints.add(point);
 
 
                     options = new MarkerOptions();
-                    options.position(point);//�^�b�v�����ʒu�Ƀs���𗧂Ă�
-/*����^�b�v�ŗv�~���ҁA���ڂŒʍs�s�ʒu�ݒ�̏ꍇ
-if(markerPoints.size()==0)
-options.position(bhelp);
-else
-options.position(point);
-*/
+                    options.position(point);//タップした位置にピンを立てる
+                    /*初回タップで要救助者、二回目で通行不可位置設定の場合
+                    if(markerPoints.size()==0)
+                    options.position(bhelp);
+                    else
+                    options.position(point);
+                    */
 
 
                     if(markerPoints.size()==1){
@@ -148,7 +148,7 @@ options.position(point);
 
 
                     if(markerPoints.size() >= 1){
-                        //���[�g����
+                        //ルート検索
                         routeSearch();
                     }
                 }
@@ -221,7 +221,7 @@ options.position(point);
         curr = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(curr).title("Marker"));
         //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curr, 15));
-        //����ǂݍ��ݎ��̂ݕ\���ʒu���ړ�
+        //初回読み込み時のみ表示位置を移動
         if(startup==0)
         {
             startup=1;
@@ -233,15 +233,15 @@ options.position(point);
         progressDialog.show();
 
         LatLng origin = curr;
-        LatLng dest = markerPoints.get(0);//�v�~���҂̈ʒu���ǂݍ���
+        LatLng dest = markerPoints.get(0);//要救助者の位置情報読み込み
         LatLng xp=new LatLng(0,0);
-        //���ڂ̃^�b�v���ɒʍs�s�n�_���l��
+        //二回目のタップ時に通行不可地点も考慮
         if(markerPoints.size()==2) {
             xp=markerPoints.get(1);
-            //point�����炷���p�����߂�֐�
+            //pointをずらす方角を決める関数
             getstopper(origin, dest,xp);
         }
-        //�ʂ�|�C���g
+        //通るポイント
         LatLng xpoints=new LatLng(xpojia,xpojib);
         String url = getDirectionsUrl(origin, dest,xpoints);
 
@@ -251,14 +251,14 @@ options.position(point);
         downloadTask.execute(url);
 
     }
-    //point�����炷���p�����߂�
+    //pointをずらす方角を決める
     private void getstopper(LatLng origin,LatLng dest,LatLng xp)
     {
         if(origin.latitude-dest.latitude>0)//n->s
         {
             if(origin.longitude-dest.longitude>0)//e->w
             {
-                //origin��dest�����񂾐����k,������xp
+                //originとdestを結んだ線より北,西側にxp
                 if((xp.latitude-dest.latitude+origin.longitude-xp.longitude)>(origin.latitude-dest.latitude+origin.longitude-dest.longitude)/2.0)
                 {
                     //xpojia=dest.latitude;
@@ -266,7 +266,7 @@ options.position(point);
                     //xpojib=origin.longitude;
                     xpojib=xp.longitude+0.001;
                 }
-                //origin��dest�����񂾐�����,������xp
+                //originとdestを結んだ線より南,東側にxp
                 else
                 {
                     //xpojix=origin.latitude;
@@ -277,7 +277,7 @@ options.position(point);
             }
             else//w->e
             {
-                //origin��dest�����񂾐����k,������xp
+                //originとdestを結んだ線より北,東側にxp
                 if((xp.latitude-dest.latitude-origin.longitude+xp.longitude)>(origin.latitude-dest.latitude-origin.longitude+dest.longitude)/2.0)
                 {
                     //xpojix=dest.latitude;
@@ -285,7 +285,7 @@ options.position(point);
                     //xpojiy=origin.longitude;
                     xpojib=xp.longitude-0.001;
                 }
-                //origin��dest�����񂾐�����,������xp
+                //originとdestを結んだ線より南,西側にxp
                 else
                 {
                     //xpojix=origin.latitude;
@@ -299,7 +299,7 @@ options.position(point);
         {
             if(origin.longitude-dest.longitude>0)//e->w
             {
-                //origin��dest�����񂾐����k,������xp
+                //originとdestを結んだ線より北,東側にxp
                 if((xp.latitude-origin.latitude-dest.longitude+xp.longitude)>(-origin.latitude+dest.latitude+origin.longitude-dest.longitude)/2.0)
                 {
                     //xpojix=origin.latitude;
@@ -307,7 +307,7 @@ options.position(point);
                     //xpojiy=dest.longitude;
                     xpojib=xp.longitude-0.001;
                 }
-                //origin��dest�����񂾐�����,������xp
+                //originとdestを結んだ線より南,西側にxp
                 else
                 {
                     //xpojix=dest.latitude;
@@ -318,7 +318,7 @@ options.position(point);
             }
             else//w->e
             {
-                //origin��dest�����񂾐����k,������xp
+                //originとdestを結んだ線より北,西側にxp
                 if((xp.latitude-origin.latitude+dest.longitude-xp.longitude)>(-origin.latitude+dest.latitude-origin.longitude+dest.longitude)/2.0)
                 {
                     //xpojix=origin.latitude;
@@ -326,7 +326,7 @@ options.position(point);
                     //xpojiy=dest.longitude;
                     xpojib=xp.longitude+0.001;
                 }
-                //origin��dest�����񂾐�����,������xp
+                //originとdestを結んだ線より南,東側にxp
                 else
                 {
                     //xpojix=dest.latitude;
@@ -353,10 +353,10 @@ options.position(point);
             parameters = str_origin + "&" + str_dest + "&" + sensor + "&language=ja" + "&mode=" + travelMode;
         }
         else {
-            //�p�����[�^
+            //パラメータ
             parameters = str_origin + "&" + str_dest + "&" + wayp + "&" + sensor + "&language=ja" + "&mode=" + travelMode;
         }
-        //JSON�w��
+        //JSON指定
         String output = "json";
 
 
@@ -405,7 +405,7 @@ options.position(point);
 
 
     private class DownloadTask extends AsyncTask<String, Void, String>{
-        //�񓯊��Ŏ擾
+        //非同期で取得
 
         @Override
         protected String doInBackground(String... url) {
@@ -457,7 +457,7 @@ options.position(point);
             return routes;
         }
 
-        //���[�g�����œ������W���g���Čo�H�\��
+        //ルート検索で得た座標を使って経路表示
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
 
@@ -486,14 +486,14 @@ options.position(point);
                         points.add(position);
                     }
 
-                    //�|�����C��
+                    //ポリライン
                     lineOptions.addAll(points);
                     lineOptions.width(10);
                     lineOptions.color(0x550000ff);
 
                 }
 
-                //�`��
+                //描画
                 mMap.addPolyline(lineOptions);
             }else{
                 mMap.clear();
