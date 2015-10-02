@@ -27,14 +27,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button button2 = (Button)findViewById(R.id.button2);
         Button button3 = (Button)findViewById(R.id.button3);
         Button button4 = (Button)findViewById(R.id.button4);
-        Button button5 = (Button)findViewById(R.id.button5);
 
+        Button button5 = (Button)findViewById(R.id.button5);
+        Button button6 = (Button)findViewById(R.id.button6);
         showDialog(1);
         button.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
+
         button5.setOnClickListener(this);
+        button6.setOnClickListener(this);
+
     }
 
     @Override
@@ -110,15 +114,20 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
             startActivity(intent);
 
+        }else if(v.getId() == R.id.button4) {
+
+            Intent intent = new Intent(MainActivity.this,TransceiverMain.class);
+            startActivity(intent);
+
         }
-        else if(v.getId() == R.id.button4) {
+        else if(v.getId() == R.id.button5) {
 
             Intent intent = new Intent(MainActivity.this,ActivityService.class);
             //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
             startActivity(intent);
 
         }
-        else if(v.getId() == R.id.button5) {
+        else if(v.getId() == R.id.button6) {
 
             Intent intent = new Intent(MainActivity.this,ChartActivity.class);
             //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");

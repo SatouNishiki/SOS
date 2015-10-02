@@ -70,9 +70,12 @@ public class DatabaseMain extends ActionBarActivity {
                     rs.close();
                     st.close();
                     con.close();
+
                 }  catch (SQLException e) {
+
                     e.printStackTrace();
                     result = e.toString();
+
                 }
 
                 handler.post(new Runnable() {
