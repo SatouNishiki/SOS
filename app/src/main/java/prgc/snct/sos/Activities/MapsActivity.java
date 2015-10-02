@@ -42,13 +42,13 @@ import android.widget.Toast;
 public class MapsActivity extends FragmentActivity implements LocationListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public double xpojia=0.0;//’†Œp’n“_—pˆÜ“x
-    public double xpojib=0.0;//’†Œp’n“_—pŒo“x
+    public double xpojia=0.0;//ï¿½ï¿½ï¿½pï¿½nï¿½_ï¿½pï¿½Ü“x
+    public double xpojib=0.0;//ï¿½ï¿½ï¿½pï¿½nï¿½_ï¿½pï¿½oï¿½x
 
     public static String posinfo = "";
     public static String info_A = "";
     public static String info_B = "";
-    LatLng old=new LatLng(0,0);//ƒ^ƒbƒvˆÊ’u‹L‰¯—p
+    LatLng old=new LatLng(0,0);//ï¿½^ï¿½bï¿½vï¿½Ê’uï¿½Lï¿½ï¿½ï¿½p
     ArrayList<LatLng> markerPoints;
 
     public static MarkerOptions options;
@@ -56,8 +56,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     public ProgressDialog progressDialog;
 
     public String travelMode = "driving";//default
-    LatLng curr = new LatLng(0,0);//‹~•ÀsÒ‚ÌˆÊ’uî•ñ
-    //LatLng bhelp = new LatLng(bhelpx,bhelpy);//—v‹~•Ò‚ÌˆÊ’uî•ñ
+    LatLng curr = new LatLng(0,0);//ï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½Ò‚ÌˆÊ’uï¿½ï¿½ï¿½
+    //LatLng bhelp = new LatLng(bhelpx,bhelpy);//ï¿½vï¿½~ï¿½ï¿½ï¿½Ò‚ÌˆÊ’uï¿½ï¿½ï¿½
 
     int startup=0;
     @Override
@@ -71,38 +71,38 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         progressDialog.hide();
 
 
-        //‰Šú‰»
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         markerPoints = new ArrayList<LatLng>();
         if(mMap!=null){
 
             mMap.setMyLocationEnabled(true);
 
-            //ƒNƒŠƒbƒNƒŠƒXƒi[
+            //ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½Xï¿½iï¿½[
             mMap.setOnMapClickListener(new OnMapClickListener() {
                 @Override
-                //‰æ–ÊƒNƒŠƒbƒN‚Åƒ‹[ƒgŒŸõ(¡‚Íƒ^ƒbƒv‚µ‚½ˆÊ’uj
+                //ï¿½ï¿½ÊƒNï¿½ï¿½ï¿½bï¿½Nï¿½Åƒï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Íƒ^ï¿½bï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½j
                 public void onMapClick(LatLng point) {
-                    //O‰ñ–Ú‚Ìƒ^ƒbƒv‚ÅƒŠƒZƒbƒg
+                    //ï¿½Oï¿½ï¿½Ú‚Ìƒ^ï¿½bï¿½vï¿½Åƒï¿½ï¿½Zï¿½bï¿½g
                     if(markerPoints.size()>1){
                         markerPoints.clear();
                         mMap.clear();
                     }
-                    //“ñ‰ñ–Ú‚Ìƒ^ƒbƒv‚É‹Œƒ‹[ƒgíœ
+                    //ï¿½ï¿½ï¿½Ú‚Ìƒ^ï¿½bï¿½vï¿½ï¿½ï¿½É‹ï¿½ï¿½ï¿½ï¿½[ï¿½gï¿½íœ
                     if(markerPoints.size()==1)
                     {
                         mMap.clear();
                         options = new MarkerOptions();
                         options.position(old);
                         options.title("A");
-                        mMap.addMarker(options);
+                         mMap.addMarker(options);
                     }
 
                     markerPoints.add(point);
 
 
                     options = new MarkerOptions();
-                    options.position(point);//ƒ^ƒbƒv‚µ‚½ˆÊ’u‚Éƒsƒ“‚ğ—§‚Ä‚é
-/*‰‰ñƒ^ƒbƒv‚Å—v‹~•ÒA“ñ‰ñ–Ú‚Å’Ês•s‰ÂˆÊ’uİ’è‚Ìê‡
+                    options.position(point);//ï¿½^ï¿½bï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½Éƒsï¿½ï¿½ï¿½ğ—§‚Ä‚ï¿½
+/*ï¿½ï¿½ï¿½ï¿½^ï¿½bï¿½vï¿½Å—vï¿½~ï¿½ï¿½ï¿½ÒAï¿½ï¿½ï¿½Ú‚Å’Êsï¿½sï¿½ÂˆÊ’uï¿½İ’ï¿½Ìê‡
 if(markerPoints.size()==0)
 options.position(bhelp);
 else
@@ -148,7 +148,7 @@ options.position(point);
 
 
                     if(markerPoints.size() >= 1){
-                        //ƒ‹[ƒgŒŸõ
+                        //ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½
                         routeSearch();
                     }
                 }
@@ -221,7 +221,7 @@ options.position(point);
         curr = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(curr).title("Marker"));
         //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curr, 15));
-        //‰‰ñ“Ç‚İ‚İ‚Ì‚İ•\¦ˆÊ’u‚ğˆÚ“®
+        //ï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½İï¿½ï¿½Ì‚İ•\ï¿½ï¿½ï¿½Ê’uï¿½ï¿½ï¿½Ú“ï¿½
         if(startup==0)
         {
             startup=1;
@@ -233,15 +233,15 @@ options.position(point);
         progressDialog.show();
 
         LatLng origin = curr;
-        LatLng dest = markerPoints.get(0);//—v‹~•Ò‚ÌˆÊ’uî•ñ“Ç‚İ‚İ
+        LatLng dest = markerPoints.get(0);//ï¿½vï¿½~ï¿½ï¿½ï¿½Ò‚ÌˆÊ’uï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
         LatLng xp=new LatLng(0,0);
-        //“ñ‰ñ–Ú‚Ìƒ^ƒbƒv‚É’Ês•s‰Â’n“_‚àl—¶
+        //ï¿½ï¿½ï¿½Ú‚Ìƒ^ï¿½bï¿½vï¿½ï¿½ï¿½É’Êsï¿½sï¿½Â’nï¿½_ï¿½ï¿½ï¿½lï¿½ï¿½
         if(markerPoints.size()==2) {
             xp=markerPoints.get(1);
-            //point‚ğ‚¸‚ç‚·•ûŠp‚ğŒˆ‚ß‚éŠÖ”
+            //pointï¿½ï¿½ï¿½ï¿½ï¿½ç‚·ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½Öï¿½
             getstopper(origin, dest,xp);
         }
-        //’Ê‚éƒ|ƒCƒ“ƒg
+        //ï¿½Ê‚ï¿½|ï¿½Cï¿½ï¿½ï¿½g
         LatLng xpoints=new LatLng(xpojia,xpojib);
         String url = getDirectionsUrl(origin, dest,xpoints);
 
@@ -251,14 +251,14 @@ options.position(point);
         downloadTask.execute(url);
 
     }
-    //point‚ğ‚¸‚ç‚·•ûŠp‚ğŒˆ‚ß‚é
+    //pointï¿½ï¿½ï¿½ï¿½ï¿½ç‚·ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
     private void getstopper(LatLng origin,LatLng dest,LatLng xp)
     {
         if(origin.latitude-dest.latitude>0)//n->s
         {
             if(origin.longitude-dest.longitude>0)//e->w
             {
-                //origin‚Ædest‚ğŒ‹‚ñ‚¾ü‚æ‚è–k,¼‘¤‚Éxp
+                //originï¿½ï¿½destï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¾ï¿½ï¿½ï¿½ï¿½k,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xp
                 if((xp.latitude-dest.latitude+origin.longitude-xp.longitude)>(origin.latitude-dest.latitude+origin.longitude-dest.longitude)/2.0)
                 {
                     //xpojia=dest.latitude;
@@ -266,7 +266,7 @@ options.position(point);
                     //xpojib=origin.longitude;
                     xpojib=xp.longitude+0.001;
                 }
-                //origin‚Ædest‚ğŒ‹‚ñ‚¾ü‚æ‚è“ì,“Œ‘¤‚Éxp
+                //originï¿½ï¿½destï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¾ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xp
                 else
                 {
                     //xpojix=origin.latitude;
@@ -277,7 +277,7 @@ options.position(point);
             }
             else//w->e
             {
-                //origin‚Ædest‚ğŒ‹‚ñ‚¾ü‚æ‚è–k,“Œ‘¤‚Éxp
+                //originï¿½ï¿½destï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¾ï¿½ï¿½ï¿½ï¿½k,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xp
                 if((xp.latitude-dest.latitude-origin.longitude+xp.longitude)>(origin.latitude-dest.latitude-origin.longitude+dest.longitude)/2.0)
                 {
                     //xpojix=dest.latitude;
@@ -285,7 +285,7 @@ options.position(point);
                     //xpojiy=origin.longitude;
                     xpojib=xp.longitude-0.001;
                 }
-                //origin‚Ædest‚ğŒ‹‚ñ‚¾ü‚æ‚è“ì,¼‘¤‚Éxp
+                //originï¿½ï¿½destï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¾ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xp
                 else
                 {
                     //xpojix=origin.latitude;
@@ -299,7 +299,7 @@ options.position(point);
         {
             if(origin.longitude-dest.longitude>0)//e->w
             {
-                //origin‚Ædest‚ğŒ‹‚ñ‚¾ü‚æ‚è–k,“Œ‘¤‚Éxp
+                //originï¿½ï¿½destï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¾ï¿½ï¿½ï¿½ï¿½k,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xp
                 if((xp.latitude-origin.latitude-dest.longitude+xp.longitude)>(-origin.latitude+dest.latitude+origin.longitude-dest.longitude)/2.0)
                 {
                     //xpojix=origin.latitude;
@@ -307,7 +307,7 @@ options.position(point);
                     //xpojiy=dest.longitude;
                     xpojib=xp.longitude-0.001;
                 }
-                //origin‚Ædest‚ğŒ‹‚ñ‚¾ü‚æ‚è“ì,¼‘¤‚Éxp
+                //originï¿½ï¿½destï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¾ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xp
                 else
                 {
                     //xpojix=dest.latitude;
@@ -318,7 +318,7 @@ options.position(point);
             }
             else//w->e
             {
-                //origin‚Ædest‚ğŒ‹‚ñ‚¾ü‚æ‚è–k,¼‘¤‚Éxp
+                //originï¿½ï¿½destï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¾ï¿½ï¿½ï¿½ï¿½k,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xp
                 if((xp.latitude-origin.latitude+dest.longitude-xp.longitude)>(-origin.latitude+dest.latitude-origin.longitude+dest.longitude)/2.0)
                 {
                     //xpojix=origin.latitude;
@@ -326,7 +326,7 @@ options.position(point);
                     //xpojiy=dest.longitude;
                     xpojib=xp.longitude+0.001;
                 }
-                //origin‚Ædest‚ğŒ‹‚ñ‚¾ü‚æ‚è“ì,“Œ‘¤‚Éxp
+                //originï¿½ï¿½destï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¾ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xp
                 else
                 {
                     //xpojix=dest.latitude;
@@ -353,10 +353,10 @@ options.position(point);
             parameters = str_origin + "&" + str_dest + "&" + sensor + "&language=ja" + "&mode=" + travelMode;
         }
         else {
-            //ƒpƒ‰ƒ[ƒ^
+            //ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^
             parameters = str_origin + "&" + str_dest + "&" + wayp + "&" + sensor + "&language=ja" + "&mode=" + travelMode;
         }
-        //JSONw’è
+        //JSONï¿½wï¿½ï¿½
         String output = "json";
 
 
@@ -405,7 +405,7 @@ options.position(point);
 
 
     private class DownloadTask extends AsyncTask<String, Void, String>{
-        //”ñ“¯Šú‚Åæ“¾
+        //ï¿½ñ“¯Šï¿½ï¿½Åæ“¾
 
         @Override
         protected String doInBackground(String... url) {
@@ -457,7 +457,7 @@ options.position(point);
             return routes;
         }
 
-        //ƒ‹[ƒgŒŸõ‚Å“¾‚½À•W‚ğg‚Á‚ÄŒo˜H•\¦
+        //ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Å“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ÄŒoï¿½Hï¿½\ï¿½ï¿½
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
 
@@ -486,14 +486,14 @@ options.position(point);
                         points.add(position);
                     }
 
-                    //ƒ|ƒŠƒ‰ƒCƒ“
+                    //ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½
                     lineOptions.addAll(points);
                     lineOptions.width(10);
                     lineOptions.color(0x550000ff);
 
                 }
 
-                //•`‰æ
+                //ï¿½`ï¿½ï¿½
                 mMap.addPolyline(lineOptions);
             }else{
                 mMap.clear();
