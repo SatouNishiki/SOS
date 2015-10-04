@@ -8,9 +8,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.Wearable;
+
 import prgc.snct.sos.R;
 
 public class TopActivity extends ActionBarActivity implements View.OnClickListener{
+
+    private GoogleApiClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +31,11 @@ public class TopActivity extends ActionBarActivity implements View.OnClickListen
         ImageButton button = (ImageButton)findViewById(R.id.imageButton);
 
         button.setOnClickListener(this);
+
+        this.client = new GoogleApiClient.Builder(this)
+                .addApi(Wearable.API)
+                .build();
+        this.client.connect();
     }
 
     @Override

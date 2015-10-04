@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.GpsStatus;
 import android.location.Location;
@@ -78,6 +79,16 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
         List<String> providers = locationManager.getProviders(true);
         for (String provider : providers) {
             locationManager.requestLocationUpdates(provider, 3000, 10, this);
+        }
+
+        Intent intent = getIntent();
+
+        if(intent != null){
+             boolean autoClick = intent.getBooleanExtra("AutoClick", false);
+
+            if(autoClick){
+                button5.performClick();
+            }
         }
 
     }

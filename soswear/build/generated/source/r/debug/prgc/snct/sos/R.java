@@ -533,6 +533,7 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f020025;
         public static final int open_on_phone=0x7f020026;
         public static final int open_on_phone_animation=0x7f020027;
+        public static final int sos_bckground=0x7f020028;
     }
     public static final class id {
         public static final int adjust_height=0x7f0d0007;

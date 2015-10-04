@@ -143,6 +143,7 @@ int drawable ic_plusone_standard_off_client 0x7f020024
 int drawable ic_plusone_tall_off_client 0x7f020025
 int drawable open_on_phone 0x7f020026
 int drawable open_on_phone_animation 0x7f020027
+int drawable sos_bckground 0x7f020028
 int id adjust_height 0x7f0d0007
 int id adjust_width 0x7f0d0008
 int id alertTitle 0x7f0d0016

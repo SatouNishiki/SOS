@@ -36,4 +36,5 @@
 
     <string name="title_activity_top">TopActivity</string>
     <string name="title_activity_transceiver_main">TransceiverMain</string>
+    <string name="title_activity_wear_watch">WearWatchActivity</string>
 </resources>

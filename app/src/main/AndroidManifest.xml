@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="prgc.snct.sos" >
+    package="prgc.snct.sos"
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -8,15 +9,17 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
     -->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-
+<!-- multidexはpull後の問題をクリアするためのもの-->
     <application
+        android:name="android.support.multidex.MultiDexApplication"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -61,6 +64,7 @@
         </activity>
         <activity
 
+
             android:name=".Activities.TransceiverMain"
             android:label="@string/title_activity_transceiver_main" >
         </activity>
@@ -80,6 +84,20 @@
         <service android:name=".Activities.TryService"></service>
 
 
-    </application>ion>
+
+        <service
+            android:name=".WearWatchService" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
+    </application>
+
+
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+
+
 
 </manifest>
