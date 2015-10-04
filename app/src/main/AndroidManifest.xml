@@ -80,6 +80,6 @@
         <service android:name=".Activities.TryService"></service>
 
 
-    </application>
+    </application>ion>
 
 </manifest>

@@ -27,6 +27,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
     double lat, lng, Lat1r, Lng1r, Latr, Lngr, Latrad, Lngrad;
     public int scount = 0;
     int ret=0;
+    int ct=0;
     private static final double a = 6378137.0;
     private static final double mf = 298.2572221;
     private static final double f = 0.003352811;
@@ -100,7 +101,11 @@ scount=0;
 
             }
         }).start();
-while(scount==0)
+        while(ct<1000000000)
+        {
+            ct++;
+        }
+while(ret==0)
 {
     ret=scount;
 }
