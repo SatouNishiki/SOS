@@ -33,4 +33,5 @@
     <string name="title_activity_device_list">DeviceListActivity</string>
 
     <string name="title_activity_top">TopActivity</string>
+    <string name="title_activity_transceiver_main">TransceiverMain</string>
 </resources>

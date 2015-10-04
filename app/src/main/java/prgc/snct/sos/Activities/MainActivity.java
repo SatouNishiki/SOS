@@ -19,13 +19,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageButton button = (ImageButton)findViewById(R.id.imageButton2);
-        ImageButton button2 = (ImageButton)findViewById(R.id.imageButton3);
-        ImageButton button3 = (ImageButton)findViewById(R.id.imageButton4);
 
-        button.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
+        ImageButton ibutton = (ImageButton)findViewById(R.id.imageButton2);
+        ImageButton ibutton2 = (ImageButton)findViewById(R.id.imageButton3);
+        ImageButton ibutton3 = (ImageButton)findViewById(R.id.imageButton4);
+
+        Button button4 = (Button)findViewById(R.id.button4);
+
+        ibutton.setOnClickListener(this);
+        ibutton2.setOnClickListener(this);
+        ibutton3.setOnClickListener(this);
+        button4.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +72,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             Intent intent = new Intent(MainActivity.this,DatabaseMain.class);
             //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
+            startActivity(intent);
+
+        }else if(v.getId() == R.id.button4) {
+
+            Intent intent = new Intent(MainActivity.this,TransceiverMain.class);
             startActivity(intent);
 
         }
