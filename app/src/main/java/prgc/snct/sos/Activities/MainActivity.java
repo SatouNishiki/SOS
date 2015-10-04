@@ -33,8 +33,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
         Button button5 = (Button)findViewById(R.id.button5);
-        Button button6 = (Button)findViewById(R.id.button6);
-        showDialog(1);
+        //Button button6 = (Button)findViewById(R.id.button6);ã€€chart(Mounting ly.)
+        //showDialog(1); name(Mounting ly.)
 
         ibutton.setOnClickListener(this);
         ibutton2.setOnClickListener(this);
@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         button4.setOnClickListener(this);
 
         button5.setOnClickListener(this);
-        button6.setOnClickListener(this);
+        //button6.setOnClickListener(this);
 
     }
 
@@ -75,11 +75,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case 1:
 
-                //ƒŒƒCƒAƒEƒg‚ÌŒÄ‚Ño‚µ
+                //ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ÌŒÄ‚Ñoï¿½ï¿½
                 LayoutInflater factory = LayoutInflater.from(this);
                 final View inputView = factory.inflate(R.layout.input_dialog, null);
 
-                //ƒ_ƒCƒAƒƒO‚Ìì¬(AlertDialog.Builder)
+                //ï¿½_ï¿½Cï¿½Aï¿½ï¿½ï¿½Oï¿½Ìì¬(AlertDialog.Builder)
                 return new AlertDialog.Builder(MainActivity.this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("name")
@@ -87,8 +87,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
 
-                    /* int whichButton ‚É‚æ‚èA‰Ÿ‚³‚ê‚½ƒ{ƒ^ƒ“‚ğ”»’è */
-                    /* ó•tˆ— F“ü—Í‚³‚ê‚½ƒeƒLƒXƒg‚Ìˆ—‚È‚Ç */
+                    /* int whichButton ï¿½É‚ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½{ï¿½^ï¿½ï¿½ï¿½ğ”»’ï¿½ */
+                    /* ï¿½ï¿½tï¿½ï¿½ï¿½ï¿½ ï¿½Fï¿½ï¿½ï¿½Í‚ï¿½ï¿½ê‚½ï¿½eï¿½Lï¿½Xï¿½gï¿½Ìï¿½ï¿½ï¿½ï¿½È‚ï¿½ */
                         }
                     })
 
