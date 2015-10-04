@@ -7,10 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyActivity"
-    tools:deviceIds="wear">
+    tools:deviceIds="wear"
+    android:background="@drawable/sos_bckground">
+
 
 
 </android.support.wearable.view.GridViewPager>
+
+
 
 
 

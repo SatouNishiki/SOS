@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
             this.client.connect();
 
             Button button = new Button(this.getActivity());
-            button.setText("OK");
+            button.setText("救助要請!!");
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
