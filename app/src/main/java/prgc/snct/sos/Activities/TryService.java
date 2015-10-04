@@ -22,6 +22,7 @@ public class TryService extends Service {
     int flag=0;
     Context con =this;
     int scount;
+    double lat,lng,Latr,Lngr;
     // Toastを何回表示されたか数えるためのカウント
     private int mCount = 0;
 
@@ -36,12 +37,16 @@ public class TryService extends Service {
 
         @Override
         public void run() {
-
+            final GetSOS d=new GetSOS(con);
+            lat=d.lat;
+            lng=d.lng;
+            Latr=d.Latr;
+            Lngr=d.Lngr;
             // アクティブな間だけ処理をする
             while (mThreadActive) {
 
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     // TODO 自動生成された catch ブロック
                     e.printStackTrace();
@@ -55,18 +60,18 @@ public class TryService extends Service {
                     public void run() {
                         if(mThreadActive==true) {
                             mCount++;
-
-                            GetSOS d=new GetSOS();
-
-                                scount=d.geter(con);
+                            showText("Service was bound.");
 
 
-                            if(scount>oldscount) {
+                                scount=d.geter(lat,lng,Latr,Lngr);
+
+
+                            if(scount>oldscount&&flag==1) {
                                 showNotification(TryService.this);
                             }
                             flag=1;
 
-                            //if(oldscount<scount)
+                            if(oldscount<scount)
                                 oldscount=scount;
 
 

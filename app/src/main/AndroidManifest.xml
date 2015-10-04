@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Activities.TopActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,6 @@
         <activity
             android:name=".Activities.BluetoothMain"
             android:label="@string/title_activity_bluetooth_main" >
-
         </activity>
         <activity
             android:name=".Activities.DeviceListActivity"
@@ -54,6 +53,11 @@
         <activity
             android:name=".Activities.DatabaseMain"
             android:label="@string/title_activity_database_main" >
+        </activity>
+        <activity
+
+            android:name=".Activities.MainActivity"
+            android:label="@string/title_activity_main" >
         </activity>
         <activity
 

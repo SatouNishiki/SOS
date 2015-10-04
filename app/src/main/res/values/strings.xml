@@ -5,8 +5,13 @@
     <string name="setname">名前を入力してください。</string>
     <string name="nametitle">名前設定</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Maps Activity</string>
+    <string name="title_activity_main">Main Activity</string>
     <string name="title_activity_bluetooth_main">BluetoothMain</string>
+    <string name="title_activity_database_main">Database Main</string>
+
+    <!-- toppage -->
+    <string name="emergency">緊急時はこちらから</string>
 
     <!--  BluetoothChat -->
     <string name="send">Send</string>
@@ -28,6 +33,7 @@
     <string name="insecure_connect">Connect a device - Insecure</string>
     <string name="discoverable">Make discoverable</string>
     <string name="title_activity_device_list">DeviceListActivity</string>
-    <string name="title_activity_database_main">DatabaseMain</string>
+
+    <string name="title_activity_top">TopActivity</string>
     <string name="title_activity_transceiver_main">TransceiverMain</string>
 </resources>

@@ -26,6 +26,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
     private static final String pass = "kadai";
     double lat, lng, Lat1r, Lng1r, Latr, Lngr, Latrad, Lngrad;
     public int scount = 0;
+    int ret=0;
     private static final double a = 6378137.0;
     private static final double mf = 298.2572221;
     private static final double f = 0.003352811;
@@ -33,11 +34,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
     private static final double PI = 3.1415926536;
     static boolean get = false;
     private LocationManager locationManager;
-    public GetSOS() {
-
-
-    }
-    public int geter(Context con){
+    public GetSOS(Context con) {
 
         locationManager = (LocationManager)con.getSystemService(Context.LOCATION_SERVICE);
 
@@ -51,12 +48,20 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
 
         lat = loc.getLatitude();
         lng = loc.getLongitude();
+        while(lat==0.0)
+        {
+
+        }
         get = true;
         Latrad = (lat/180)*PI;
         Lat1r = ((PI/648000)*a*(1-ee)/(Math.pow((1-ee*(Math.pow((Math.sin(Latrad)), 2))), 1.5))) * 3.6;
         Lng1r = ((PI/648000)*a*(Math.cos(Latrad))/(Math.sqrt(1 - ee * (Math.pow(Math.sin(Latrad), 2))))) * 3.6;
         Latr = 2/Lat1r;
         Lngr = 2/Lng1r;
+    }
+    public int geter(final double lat, final double lng, final double Latr, final double Lngr){
+
+scount=0;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -82,6 +87,9 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
                     rs.close();
                     st.close();
                     con.close();
+                    if(scount > 0){
+                        ret=scount;
+                    }
 
 
                 } catch (Exception e) {
@@ -92,10 +100,13 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
 
             }
         }).start();
+while(scount==0)
+{
+    ret=scount;
+}
 
 
-
-        return scount;
+        return ret;
     }
 
 
