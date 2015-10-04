@@ -3,13 +3,15 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="prgc.snct.sos.Activities.TopActivity">
+
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
-        android:src="@drawable/sos_bckground"
+        android:src="@drawable/sos_top_3"
         android:scaleType="fitXY"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true" />
@@ -17,28 +19,29 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
-        android:background="@drawable/mapbutton_state"
+        android:id="@+id/imageButton"
+        android:background="@drawable/btn_state"
+        android:layout_marginTop="115dp"
         android:layout_alignTop="@+id/imageView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp" />
+        android:layout_alignParentStart="true" />
 
-    <ImageButton
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton3"
-        android:background="@drawable/bluetoothbutton_state"
-        android:layout_below="@+id/imageButton2"
+        android:id="@+id/imageView3"
+        android:src="@drawable/suwako"
+        android:scaleType="fitStart"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginStart="49dp"
+        android:layout_alignParentEnd="true" />
 
-    <ImageButton
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton4"
-        android:background="@drawable/databasebutton_state"
-        android:layout_below="@+id/imageButton3"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp" />
-
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/emergency"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_toEndOf="@+id/imageButton"
+        android:layout_marginStart="41dp" />
 </RelativeLayout>
