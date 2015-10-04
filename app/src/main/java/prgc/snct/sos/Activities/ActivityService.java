@@ -33,6 +33,7 @@ public class ActivityService extends Activity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(ActivityService.this, prgc.snct.sos.Activities.TryService.class);
+
                 startService(intent);
             }
         });

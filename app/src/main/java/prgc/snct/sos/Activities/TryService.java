@@ -18,7 +18,10 @@ import prgc.snct.sos.R;
 public class TryService extends Service {
 
     private final static String TAG = "TryService#";
-
+    int oldscount=0;
+    int flag=0;
+    Context con =this;
+    int scount;
     // Toastを何回表示されたか数えるためのカウント
     private int mCount = 0;
 
@@ -38,7 +41,7 @@ public class TryService extends Service {
             while (mThreadActive) {
 
                 try {
-                    Thread.sleep(30000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     // TODO 自動生成された catch ブロック
                     e.printStackTrace();
@@ -52,14 +55,26 @@ public class TryService extends Service {
                     public void run() {
                         if(mThreadActive==true) {
                             mCount++;
-                            showText("Count:" + mCount);
 
+                            GetSOS d=new GetSOS();
+
+                                scount=d.geter(con);
+
+
+                            if(scount>oldscount) {
                                 showNotification(TryService.this);
+                            }
+                            flag=1;
+
+                            //if(oldscount<scount)
+                                oldscount=scount;
+
 
                         }
                     }
                 });
             }
+
 
             mHandler.post(new Runnable() {
 
@@ -155,10 +170,10 @@ public class TryService extends Service {
         // 通知バーの内容を決める
         Notification n = new NotificationCompat.Builder(ctx)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setTicker("Service has started.")
+                .setTicker("There is a rescue request person..")
                 .setWhen(System.currentTimeMillis())    // 時間
-                .setContentTitle("Doing Service")
-                .setContentText("This bar, please choose \"service end\" behind the tap.")
+                .setContentTitle("SOS")
+                .setContentText("When a tap is done, the location of the linchpin savior is indicated.")
                 .setContentIntent(contentIntent)// インテント
                 .build();
         n.defaults |= Notification.DEFAULT_ALL;
