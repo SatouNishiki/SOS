@@ -24,6 +24,7 @@ import java.util.List;
  * Created by �q�� on 2015/09/23.
  * �o�H�Ăяo���p�N���X
  */
+
 public class parseJsonpOfDirectionAPI {
 
     MapsActivity ma;
