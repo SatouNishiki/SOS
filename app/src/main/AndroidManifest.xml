@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="prgc.snct.sos" >
+    package="prgc.snct.sos"
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,8 +16,10 @@
     -->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-
+<!-- multidexはpull後の問題をクリアするためのもの-->
     <application
+        android:name="android.support.multidex.MultiDexApplication"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -55,12 +58,32 @@
             android:label="@string/title_activity_database_main" >
         </activity>
         <activity
+
             android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
         <activity
+
+
             android:name=".Activities.TransceiverMain"
-            android:label="@string/title_activity_transceiver_main" ></activity>
+            android:label="@string/title_activity_transceiver_main" >
+        </activity>
+
+        <activity
+
+            android:name=".Activities.ActivityService"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".Activities.ChartActivity"
+            android:label="@string/app_name" >
+
+        </activity>
+
+        <service android:name=".Activities.TryService"></service>
+
+
 
         <service
             android:name=".WearWatchService" >
@@ -69,6 +92,7 @@
             </intent-filter>
         </service>
     </application>
+
 
     <meta-data
         android:name="com.google.android.gms.version"

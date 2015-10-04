@@ -1,10 +1,12 @@
 package prgc.snct.sos.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -36,10 +38,12 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import android.app.ProgressDialog;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
-public class MapsActivity extends FragmentActivity implements LocationListener{
+public class MapsActivity extends FragmentActivity implements LocationListener,View.OnClickListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     public double xpojia=0.0;//中継地点用緯度
@@ -69,7 +73,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("Please wait...");
         progressDialog.hide();
-
+        Button button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(this);
 
         //初期化
         markerPoints = new ArrayList<LatLng>();
@@ -508,7 +513,17 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
 
 
+    public void onClick(View v) {
+        if(v.getId() == R.id.button) {
 
+            double a=curr.latitude;
+            double b=curr.longitude;
+            Uri uri = Uri.parse("https://www.google.co.jp/maps/search/%E7%97%85%E9%99%A2/@"+a+","+b+"z/data=!3m1!4b1");
+            Intent i = new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(i);
+
+        }
+    }
 
 
     @Override
