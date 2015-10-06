@@ -3,9 +3,11 @@ package prgc.snct.sos.Activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -24,6 +26,7 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
     private Button b3;
     private Button b4;
     private Button b5;
+    private Button b6;
     MediaPlayer mp;
     Camera c = Camera.open();
     AudioManager am ;
@@ -76,10 +79,14 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
         b4.setOnClickListener(this);
 
 
-        b5=(Button)findViewById(R.id.comres);
+        b5=(Button)findViewById(R.id.Ambulance);
 
 
         b5.setOnClickListener(this);
+        b6=(Button)findViewById(R.id.comres);
+
+
+        b6.setOnClickListener(this);
 
 
     }
@@ -125,7 +132,11 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
 //プレビューをしないと光らない
                 c.startPreview();
                 break;
-
+            case R.id.Ambulance:
+                Uri uri = Uri.parse("tel:119");
+                Intent i = new Intent(Intent.ACTION_DIAL,uri);
+                startActivity(i);
+                break;
             case R.id.comres:
                 break;
 

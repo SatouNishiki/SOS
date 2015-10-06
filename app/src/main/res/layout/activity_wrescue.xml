@@ -32,10 +32,18 @@
         android:layout_below="@+id/lonLL" >
     </Button>
     <Button
+        android:id="@+id/Ambulance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="119番通報"
+        android:layout_below="@+id/loffLL" >
+    </Button>
+    <Button
         android:id="@+id/comres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Completion"
-        android:layout_below="@+id/loffLL" >
+        android:layout_below="@+id/Ambulance" >
     </Button>
+
 </LinearLayout>
