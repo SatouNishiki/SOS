@@ -14,7 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.GpsStatus;
@@ -154,6 +156,12 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
                             @Override
                             public void run() {
                                 textView1.setText("Send SOS.");
+
+
+                                Intent intent = new Intent(TransceiverMain.this, WaitRescueActivity.class);
+                                startActivity(intent);
+
+
                             }
                         });
                     }
