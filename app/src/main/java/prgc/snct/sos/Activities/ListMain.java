@@ -33,12 +33,9 @@ import java.util.Map;
 
 import prgc.snct.sos.R;
 
-public class ListMain extends ActionBarActivity implements View.OnClickListener {
+public class ListMain extends Activity implements View.OnClickListener {
 
-    ArrayList<String> names;
-    ArrayList<String> id;
-    int leng;
-    Map<String, String> conMap;
+    SimpleAdapter adapter;
     List<Map<String, String>> contactlist;
 
     @Override
@@ -50,16 +47,9 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
         final View layout = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
 
-        names = new ArrayList<String>();
-        names.add("NULL");
-        id = new ArrayList<String>();
-        id.add("NULL");
+        contactlist = new ArrayList<Map<String, String>>();
 
         loadList();
-
-        if(names.isEmpty() == false){
-            leng = names.size();
-        }
 
         Button addButton = (Button)findViewById(R.id.button7);
         Button clearButton = (Button)findViewById(R.id.button8);
@@ -69,7 +59,6 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
         addButton.setOnClickListener(this);
         clearButton.setOnClickListener(this);
 
-        contactlist = new ArrayList<Map<String, String>>();
         List<Map<String, String>> titlecontactlist = new ArrayList<Map<String, String>>();
 
         setMap();
@@ -79,7 +68,7 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
         titleConMap.put("ID", "ID");
         titlecontactlist.add(titleConMap);
 
-        SimpleAdapter adapter = new SimpleAdapter(this, contactlist, android.R.layout.simple_list_item_2, new String[] { "Name", "ID" }, new int[] { android.R.id.text1, android.R.id.text2 });
+        adapter = new SimpleAdapter(this, contactlist, android.R.layout.simple_list_item_2, new String[] { "Name", "ID" }, new int[] { android.R.id.text1, android.R.id.text2 });
         SimpleAdapter titleAdapter = new SimpleAdapter(this, titlecontactlist, android.R.layout.simple_list_item_2, new String[] { "Name", "ID" }, new int[] { android.R.id.text1, android.R.id.text2 });
         listView.setAdapter(adapter);
         listTitle.setAdapter(titleAdapter);
@@ -121,11 +110,11 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
                     EditText name = (EditText)layout.findViewById(R.id.customDlg_name);
                     String strId   = Id.getText().toString();
                     String strName = name.getText().toString();
-                    names.add(strName);
-                    id.add(strId);
-                    deleteNull();
+                    Map<String, String> newLine = new HashMap<String, String>();
+                    newLine.put("Name", strName);
+                    newLine.put("ID", strId);
+                    contactlist.add(newLine);
                     saveList();
-                    leng++;
                     setMap();
                 }
             });
@@ -140,10 +129,7 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
 
         }else if(v.getId() == R.id.button8){
 
-            names.clear();
-            id.clear();
-            names.add("NULL");
-            id.add("NULL");
+            contactlist.clear();
             saveList();
             setMap();
 
@@ -154,8 +140,15 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
         // objectをjson文字列へ変換
+        List<String> names = new ArrayList<String>();
+        List<String> ids = new ArrayList<String>();
+        for (int i = 0; i < contactlist.size(); ++i)
+        {
+            names.add(contactlist.get(i).get("Name"));
+            ids.add(contactlist.get(i).get("ID"));
+        }
         String jsonNamesString = gson.toJson(names);
-        String jsonIdString = gson.toJson(id);
+        String jsonIdString = gson.toJson(ids);
         // 変換後の文字列をputStringで保存
         prefs.edit().putString("ARRAY_NAMES",jsonNamesString).apply();
         prefs.edit().putString("ARRAY_ID",jsonIdString).apply();
@@ -169,35 +162,30 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
         String savedIdString = prefs.getString("ARRAY_ID", "");
 
         // json文字列をArrayListクラスのインスタンスに変換
+        List<String> names = new ArrayList<String>();
+        List<String> ids = new ArrayList<String>();
         if((gson.fromJson(savedNamesString, ArrayList.class)).isEmpty() == false){
             names = gson.fromJson(savedNamesString, ArrayList.class);
-            id = gson.fromJson(savedIdString, ArrayList.class);
+            ids = gson.fromJson(savedIdString, ArrayList.class);
+        }
+        contactlist.clear();
+        for (int i = 0; i < names.size(); ++i)
+        {
+            Map<String, String> line = new HashMap<String, String>();
+            line.put(names.get(i), ids.get(i));
+            contactlist.add(line);
         }
     }
 
     public void setMap(){
-        contactlist.clear();
-        if("NULL".equals(names.get(0))) {
-            conMap = new HashMap<String, String>();
-            conMap.put("Name", "リストに登録されている人がいません");
-            conMap.put("ID", "");
-            contactlist.add(conMap);
-            leng = 0;
-        }else{
-            for (int i = 0; i < leng; i++) {
-                conMap = new HashMap<String, String>();
-                conMap.put("Name", names.get(i));
-                conMap.put("ID", id.get(i));
-                contactlist.add(conMap);
-            }
+        if(contactlist.isEmpty()) {
+            Map<String, String> line = new HashMap<String, String>();
+            line.put("Name", "リストに登録されている人がいません");
+            line.put("ID", "");
+            contactlist.add(line);
         }
-
-    }
-
-    public void deleteNull(){
-        if("NULL".equals(names.get(0))){
-            names.remove(0);
-            id.remove(0);
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
         }
     }
 }
