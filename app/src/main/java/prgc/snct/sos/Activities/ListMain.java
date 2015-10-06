@@ -55,15 +55,19 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
         id = new ArrayList<String>();
         id.add("NULL");
 
-        //loadList();
+        loadList();
 
-        leng = names.size();
+        if(names.isEmpty() == false){
+            leng = names.size();
+        }
 
-        Button button = (Button)findViewById(R.id.button7);
+        Button addButton = (Button)findViewById(R.id.button7);
+        Button clearButton = (Button)findViewById(R.id.button8);
         ListView listView = (ListView) findViewById(R.id.listView);
         ListView listTitle = (ListView) findViewById(R.id.listView0);
 
-        button.setOnClickListener(this);
+        addButton.setOnClickListener(this);
+        clearButton.setOnClickListener(this);
 
         contactlist = new ArrayList<Map<String, String>>();
         List<Map<String, String>> titlecontactlist = new ArrayList<Map<String, String>>();
@@ -120,7 +124,7 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
                     names.add(strName);
                     id.add(strId);
                     deleteNull();
-                    //saveList();
+                    saveList();
                     leng++;
                     setMap();
                 }
@@ -133,6 +137,16 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
 
             // 表示
             builder.create().show();
+
+        }else if(v.getId() == R.id.button8){
+
+            names.clear();
+            id.clear();
+            names.add("NULL");
+            id.add("NULL");
+            saveList();
+            setMap();
+
         }
     }
 
@@ -153,9 +167,12 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
         // 保存されているjson文字列を取得
         String savedNamesString = prefs.getString("ARRAY_NAMES", "");
         String savedIdString = prefs.getString("ARRAY_ID", "");
+
         // json文字列をArrayListクラスのインスタンスに変換
-        names = gson.fromJson(savedNamesString, ArrayList.class);
-        id = gson.fromJson(savedIdString, ArrayList.class);
+        if((gson.fromJson(savedNamesString, ArrayList.class)).isEmpty() == false){
+            names = gson.fromJson(savedNamesString, ArrayList.class);
+            id = gson.fromJson(savedIdString, ArrayList.class);
+        }
     }
 
     public void setMap(){
@@ -174,6 +191,7 @@ public class ListMain extends ActionBarActivity implements View.OnClickListener 
                 contactlist.add(conMap);
             }
         }
+
     }
 
     public void deleteNull(){
