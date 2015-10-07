@@ -236,7 +236,7 @@ public class MapActivity2 extends FragmentActivity implements LocationListener, 
             br.close();
 
         }catch(Exception e){
-            Log.d("Exception while downloading url", e.toString());
+            Log.d("MapActivity2", e.toString());
         }finally{
             iStream.close();
             urlConnection.disconnect();
@@ -262,8 +262,8 @@ public class MapActivity2 extends FragmentActivity implements LocationListener, 
             LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
             LatLng sosLatLng = new LatLng(intent.getDoubleExtra("latitude", 0), intent.getDoubleExtra("longitude", 0));
 
-            Log.v("MapActivity2", new Double(sosLatLng.latitude).toString());
-            Log.v("MapActivity2", new Double(sosLatLng.longitude).toString());
+            Log.v("MapActivity2", "Lat = " + new Double(sosLatLng.latitude).toString());
+            Log.v("MapActivity2", "Lng = " + new Double(sosLatLng.longitude).toString());
 
             if (markerPoints.size()>1){
                 markerPoints.clear();

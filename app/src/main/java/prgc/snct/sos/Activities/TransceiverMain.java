@@ -14,7 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.GpsStatus;
@@ -53,7 +55,7 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
     private static final String pass = "kadai";
     String result = "";
     String Id;
-    double lat, lng, Lat1r, Lng1r, Latr, Lngr, Latrad, Lngrad;
+    static double lat, lng, Lat1r, Lng1r, Latr, Lngr, Latrad, Lngrad;
     int scount = 0;
     private TextView textView1;
 
@@ -143,6 +145,8 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
 
                             String SQL = "INSERT INTO `sos_stat` VALUES ('" + Id + "', '" + Message + "', '" + Status + "', " + lat + ", " + lng + ", cast(now() as datetime))";
 
+                            Log.v("TraansceiverMain","Send Lat = " +  new Double(lat).toString());
+                            Log.v("TraansceiverMain", "Send Lng = " + new Double(lng).toString());
                             st.executeUpdate(SQL);
 
                             st.close();
@@ -159,6 +163,12 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
                             @Override
                             public void run() {
                                 textView1.setText("Send SOS.");
+
+
+                                Intent intent = new Intent(TransceiverMain.this, WaitRescueActivity.class);
+                                startActivity(intent);
+
+
                             }
                         });
                     }
@@ -228,6 +238,8 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
         Lngr = 2/Lng1r;
         textView1.setText("Got Location.");
 
+        Log.v("TraansceiverMain","Get Lat = " +  new Double(lat).toString());
+        Log.v("TraansceiverMain", "Get Lng = " + new Double(lng).toString());
         if(canSend) {
             button5.performClick();
             canSend = false;

@@ -7,7 +7,10 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,7 +38,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
     private static final double PI = 3.1415926536;
     static boolean get = false;
     private LocationManager locationManager;
-    private Location sosLocation;
+    private static LatLng sosLocation;
 
     public GetSOS(Context con) {
 
@@ -48,7 +51,6 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
 
         Location loc = locationManager.getLastKnownLocation(provider);
 
-        sosLocation = loc;
         lat = loc.getLatitude();
         lng = loc.getLongitude();
         while(lat==0.0)
@@ -84,6 +86,8 @@ scount=0;
                         double dlng = rs.getDouble("lng");
                         if (((dlat >= lat - Latr) && (dlat <= lat + Latr)) && ((dlng >= lng - Lngr) && (dlng <= lng + Lngr))) {
                             scount++;
+                            sosLocation = new LatLng(dlat, dlng);
+
                         }
                     }
 
@@ -93,7 +97,6 @@ scount=0;
                     if(scount > 0){
                         ret=scount;
                     }
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -147,7 +150,7 @@ while(ret==0)
     public void onGpsStatusChanged(int event) {
     }
 
-    public Location getSosLocation(){
-        return this.sosLocation;
+    public LatLng getSosLocation(){
+        return sosLocation;
     }
 }

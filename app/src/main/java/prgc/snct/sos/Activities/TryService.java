@@ -13,6 +13,8 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import prgc.snct.sos.R;
 
 //
@@ -34,7 +36,7 @@ public class TryService extends Service {
 
     private boolean mThreadActive = true;
 
-    private Location sosLocation;
+    private LatLng sosLocation;
 
     protected Runnable mTask = new Runnable() {
 
@@ -172,13 +174,11 @@ public class TryService extends Service {
        // Intent intent = new Intent(ctx, ActivityService.class);
         Intent intent = new Intent(ctx, MapActivity2.class);
         intent.putExtra("isIntent", true);
-       // double d =  0.01D + sosLocation.getLatitude();
-      //  double d2 = 0.01D + sosLocation.getLongitude();
-        intent.putExtra("latitude", sosLocation.getLatitude()); //デバッグ用に+0.01してます
-        intent.putExtra("longitude", sosLocation.getLongitude());
+        intent.putExtra("latitude", sosLocation.latitude);
+        intent.putExtra("longitude", sosLocation.longitude);
 
-        Log.v("TryService", new Double(sosLocation.getLatitude()).toString());
-        Log.v("TryService", new Double(sosLocation.getLongitude()).toString());
+        Log.v("TryService", new Double(sosLocation.latitude).toString());
+        Log.v("TryService", new Double(sosLocation.longitude).toString());
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
 

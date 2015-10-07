@@ -25,7 +25,7 @@ public class ActivityService extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
         TryService.stopNotification(ActivityService.this);
-        // ƒT[ƒrƒX‚ğŠJn‚·‚éƒ{ƒ^ƒ“
+        // ï¿½Tï¿½[ï¿½rï¿½Xï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½{ï¿½^ï¿½ï¿½
         Button btn3 = (Button)this.findViewById(R.id.button3);
         btn3.setOnClickListener(new OnClickListener() {
 
@@ -38,7 +38,7 @@ public class ActivityService extends Activity {
             }
         });
 
-        // ƒT[ƒrƒX‚ğ’â~‚·‚éƒ{ƒ^ƒ“
+        // ï¿½Tï¿½[ï¿½rï¿½Xï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½{ï¿½^ï¿½ï¿½
         Button btn4 = (Button)this.findViewById(R.id.button4);
         btn4.setOnClickListener(new OnClickListener() {
 
@@ -54,19 +54,19 @@ public class ActivityService extends Activity {
 
     // ______________________________________________________________________________
     /**
-     * ƒT[ƒrƒX‚ªÀs’†‚©
-     * @param className ƒT[ƒrƒX‚ÌƒNƒ‰ƒX–¼
-     * @return true: Às’†‚Å‚·
+     * ï¿½Tï¿½[ï¿½rï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+     * @param className ï¿½Tï¿½[ï¿½rï¿½Xï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½
+     * @return true: ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Å‚ï¿½
      */
     private boolean isServiceRunnig(String className) {
         ActivityManager am = (ActivityManager)this.getSystemService(ACTIVITY_SERVICE);
         List<RunningServiceInfo> listServiceInfo = am.getRunningServices(Integer.MAX_VALUE);
 
-        Log.i(TAG + "isServiceRunnig", "Search Start: " + className);
+        Log.i(TAG, "Search Start: " + className);
         for (RunningServiceInfo curr : listServiceInfo) {
-            Log.i(TAG + "isServiceRunnig", "Check: " + curr.service.getClassName());
+            Log.i(TAG , "Check: " + curr.service.getClassName());
             if (curr.service.getClassName().equals(className)) {
-                Log.i(TAG + "isServiceRunnig", ">>>>>>FOUND!");
+                Log.i(TAG , ">>>>>>FOUND!");
                 return true;
             }
         }
