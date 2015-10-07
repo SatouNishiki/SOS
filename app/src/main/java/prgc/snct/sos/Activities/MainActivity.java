@@ -30,21 +30,21 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         ImageButton ibutton3 = (ImageButton)findViewById(R.id.imageButton4);
 
         Button button4 = (Button)findViewById(R.id.button4);
-
-
         Button button5 = (Button)findViewById(R.id.button5);
+
         //Button button6 = (Button)findViewById(R.id.button6);　chart(Mounting ly.)
         //showDialog(1); name(Mounting ly.)
+
+        Button button7 = (Button)findViewById(R.id.button7);
 
         ibutton.setOnClickListener(this);
         ibutton2.setOnClickListener(this);
         ibutton3.setOnClickListener(this);
 
         button4.setOnClickListener(this);
-
         button5.setOnClickListener(this);
         //button6.setOnClickListener(this);
-
+        button7.setOnClickListener(this);
     }
 
     @Override
@@ -137,6 +137,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             Intent intent = new Intent(MainActivity.this,ChartActivity.class);
             //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
+            startActivity(intent);
+
+        }else if(v.getId() == R.id.button7) {
+
+            Intent intent = new Intent(MainActivity.this,ListMain.class);
             startActivity(intent);
 
         }
