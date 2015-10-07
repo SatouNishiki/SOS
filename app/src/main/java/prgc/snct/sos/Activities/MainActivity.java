@@ -104,8 +104,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v.getId() == R.id.imageButton2){
 
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            //intent.setClassName("sos.Activities", "sos.Activities.MapsActivity");
+       //     Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            Intent intent = new Intent(MainActivity.this, MapActivity2.class);
             startActivity(intent);
 
         }else if(v.getId() == R.id.imageButton3){

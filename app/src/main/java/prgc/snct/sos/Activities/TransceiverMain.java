@@ -60,13 +60,18 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
     private LocationManager locationManager;
     private Map<String, LinearLayout> layoutMap = new HashMap<String, LinearLayout>();
 
+    private static boolean isIntent = false;
+
+    private Button button5;
+    private boolean canSend = true;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transceiver_main);
 
-        Button button5 = (Button)findViewById(R.id.button5);
+        button5 = (Button)findViewById(R.id.button5);
         Button button6 = (Button)findViewById(R.id.button6);
         textView1 = (TextView)findViewById(R.id.textView);
 
@@ -87,7 +92,7 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
              boolean autoClick = intent.getBooleanExtra("AutoClick", false);
 
             if(autoClick){
-                button5.performClick();
+                isIntent = true;
             }
         }
 
@@ -222,6 +227,11 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
         Latr = 2/Lat1r;
         Lngr = 2/Lng1r;
         textView1.setText("Got Location.");
+
+        if(canSend) {
+            button5.performClick();
+            canSend = false;
+        }
     }
 
     @Override

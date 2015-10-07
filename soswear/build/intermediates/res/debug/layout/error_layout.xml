@@ -25,4 +25,4 @@
         android:textAppearance="@style/TextAppearance.Wearable.Medium"
         android:textColor="@color/primary_text_dark" />
 
-</LinearLayout><!-- From: file:/usr/local/google/buildbot/repo_clients/https___googleplex-android.googlesource.com_a_platform_manifest.git/ub-wearable-common-copper/vendor/unbundled_google/libs/wearable/wearable-support/lib/src/main/res/layout/error_layout.xml --><!-- From: file:/C:/Users/航輔/AndroidStudioProjects/SOS/SOS/soswear/build/intermediates/exploded-aar/com.google.android.support/wearable/1.2.0/res/layout/error_layout.xml -->
+</LinearLayout><!-- From: file:/usr/local/google/buildbot/repo_clients/https___googleplex-android.googlesource.com_a_platform_manifest.git/ub-wearable-common-copper/vendor/unbundled_google/libs/wearable/wearable-support/lib/src/main/res/layout/error_layout.xml --><!-- From: file:/C:/Users/iino/SOS/soswear/build/intermediates/exploded-aar/com.google.android.support/wearable/1.2.0/res/layout/error_layout.xml -->

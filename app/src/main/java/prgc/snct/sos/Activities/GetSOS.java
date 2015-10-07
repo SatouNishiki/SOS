@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by q•ã on 2015/10/03.
+ * Created by ï¿½qï¿½ï¿½ on 2015/10/03.
  */
 public class GetSOS implements LocationListener, GpsStatus.Listener{
     private static final String url = "jdbc:mysql://160.16.91.195:3306/sos_db";
@@ -35,6 +35,8 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
     private static final double PI = 3.1415926536;
     static boolean get = false;
     private LocationManager locationManager;
+    private Location sosLocation;
+
     public GetSOS(Context con) {
 
         locationManager = (LocationManager)con.getSystemService(Context.LOCATION_SERVICE);
@@ -46,7 +48,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
 
         Location loc = locationManager.getLastKnownLocation(provider);
 
-
+        sosLocation = loc;
         lat = loc.getLatitude();
         lng = loc.getLongitude();
         while(lat==0.0)
@@ -69,9 +71,9 @@ scount=0;
 
                 try {
 
-                    Class.forName("com.mysql.jdbc.Driver"); // JDBCƒhƒ‰ƒCƒo‚ğƒ[ƒh
+                    Class.forName("com.mysql.jdbc.Driver"); // JDBCï¿½hï¿½ï¿½ï¿½Cï¿½oï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½h
 
-                    Connection con = (Connection) DriverManager.getConnection(url, user, pass); // ƒT[ƒo‚ÉÚ‘±
+                    Connection con = (Connection) DriverManager.getConnection(url, user, pass); // ï¿½Tï¿½[ï¿½oï¿½ÉÚ‘ï¿½
                     Statement st = (Statement) con.createStatement();
 
                     String SQL = "SELECT * from sos_stat";
@@ -143,5 +145,9 @@ while(ret==0)
 
     @Override
     public void onGpsStatusChanged(int event) {
+    }
+
+    public Location getSosLocation(){
+        return this.sosLocation;
     }
 }

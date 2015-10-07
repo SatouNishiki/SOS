@@ -6,9 +6,11 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import prgc.snct.sos.R;
@@ -31,6 +33,9 @@ public class TryService extends Service {
 
 
     private boolean mThreadActive = true;
+
+    private Location sosLocation;
+
     protected Runnable mTask = new Runnable() {
 
         @Override
@@ -64,6 +69,7 @@ public class TryService extends Service {
 
 
                             if(scount>oldscount&&flag==1) {
+                                sosLocation = d.getSosLocation();
                                 showNotification(TryService.this);
                             }
                             flag=1;
@@ -163,7 +169,17 @@ public class TryService extends Service {
 
         NotificationManager mgr = (NotificationManager)ctx.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent intent = new Intent(ctx, ActivityService.class);
+       // Intent intent = new Intent(ctx, ActivityService.class);
+        Intent intent = new Intent(ctx, MapActivity2.class);
+        intent.putExtra("isIntent", true);
+       // double d =  0.01D + sosLocation.getLatitude();
+      //  double d2 = 0.01D + sosLocation.getLongitude();
+        intent.putExtra("latitude", sosLocation.getLatitude()); //デバッグ用に+0.01してます
+        intent.putExtra("longitude", sosLocation.getLongitude());
+
+        Log.v("TryService", new Double(sosLocation.getLatitude()).toString());
+        Log.v("TryService", new Double(sosLocation.getLongitude()).toString());
+
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
 

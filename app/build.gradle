@@ -24,8 +24,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    //multidexはpull後の問題をクリアするためのもの
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.google.android.gms:play-services:7.5.0'
-    compile 'com.android.support:multidex:1.0.0'//multidexはpull後の問題をクリアするためのもの
+    compile 'com.android.support:multidex:1.0.0'
     compile 'com.android.support:design:22.2.1'
 }

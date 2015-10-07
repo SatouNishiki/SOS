@@ -21,8 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by q•ã on 2015/09/23.
- * Œo˜HŒÄ‚Ño‚µ—pƒNƒ‰ƒX
+ * Created by ï¿½qï¿½ï¿½ on 2015/09/23.
+ * ï¿½oï¿½Hï¿½Ä‚Ñoï¿½ï¿½ï¿½pï¿½Nï¿½ï¿½ï¿½X
  */
 public class parseJsonpOfDirectionAPI {
 
@@ -43,12 +43,12 @@ public class parseJsonpOfDirectionAPI {
             for(int i=0;i<jsonRoutes.length();i++){
                 jsonLegs = ( (JSONObject)jsonRoutes.get(i)).getJSONArray("legs");
 
-                //ƒXƒ^[ƒg’n“_EZŠ
+                //ï¿½Xï¿½^ï¿½[ï¿½gï¿½nï¿½_ï¿½Eï¿½Zï¿½ï¿½
                 String s_address = (String)((JSONObject)(JSONObject)jsonLegs.get(i)).getString("start_address");
 
                 ma.info_A = s_address;
 
-                //“’…’n“_EZŠ
+                //ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½_ï¿½Eï¿½Zï¿½ï¿½
                 String e_address = (String)((JSONObject)(JSONObject)jsonLegs.get(i)).getString("end_address");
 
                 ma.info_B = e_address;
@@ -90,11 +90,11 @@ public class parseJsonpOfDirectionAPI {
                             path.add(hm);
                         }
                     }
-                    //ƒ‹[ƒgÀ•W
+                    //ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½W
                     routes.add(path);
                 }
 
-                //ƒ‹[ƒgî•ñ
+                //ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½
                 ma.posinfo = temp;
             }
 
@@ -106,7 +106,7 @@ public class parseJsonpOfDirectionAPI {
         return routes;
     }
 
-    //À•Wƒf[ƒ^‚ğƒfƒR[ƒh
+    //ï¿½ï¿½ï¿½Wï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½fï¿½Rï¿½[ï¿½h
     private List<LatLng> decodePoly(String encoded) {
 
         List<LatLng> poly = new ArrayList<LatLng>();

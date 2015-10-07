@@ -88,13 +88,12 @@ public class MapsActivity extends FragmentActivity implements LocationListener,V
                 //画面クリックでルート検索(今はタップした位置）
                 public void onMapClick(LatLng point) {
                     //三回目のタップでリセット
-                    if(markerPoints.size()>1){
+                    if (markerPoints.size() > 1) {
                         markerPoints.clear();
                         mMap.clear();
                     }
                     //二回目のタップ時に旧ルート削除
-                    if(markerPoints.size()==1)
-                    {
+                    if (markerPoints.size() == 1) {
                         mMap.clear();
                         options = new MarkerOptions();
                         options.position(old);
@@ -115,20 +114,19 @@ public class MapsActivity extends FragmentActivity implements LocationListener,V
                     */
 
 
-                    if(markerPoints.size()==1){
+                    if (markerPoints.size() == 1) {
                         //options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
                         options.title("A");
 
-                    }
-                    else if(markerPoints.size()==2) {
+                    } else if (markerPoints.size() == 2) {
                         //options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
                         options.title("B");
                     }
 
                     mMap.addMarker(options);
-                    old=point;
+                    old = point;
 
                     mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
                         @Override
@@ -137,11 +135,10 @@ public class MapsActivity extends FragmentActivity implements LocationListener,V
 
 
                             String title = marker.getTitle();
-                            if (title.equals("A")){
+                            if (title.equals("A")) {
                                 marker.setSnippet(info_A);
 
-                            }
-                            else if (title.equals("B")){
+                            } else if (title.equals("B")) {
                                 marker.setSnippet(info_B);
                             }
 
@@ -151,14 +148,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener,V
                     });
 
 
-
-                    if(markerPoints.size() >= 1){
+                    if (markerPoints.size() >= 1) {
                         //ルート検索
                         routeSearch();
                     }
                 }
             });
         }
+
 
     }
     @Override
@@ -231,7 +228,12 @@ public class MapsActivity extends FragmentActivity implements LocationListener,V
         {
             startup=1;
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curr, 15));
+
+
+
         }
+
+
 
     }
     private void routeSearch(){
