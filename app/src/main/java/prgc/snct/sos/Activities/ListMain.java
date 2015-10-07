@@ -37,6 +37,7 @@ public class ListMain extends Activity implements View.OnClickListener {
 
     SimpleAdapter adapter;
     List<Map<String, String>> contactlist;
+    boolean empty;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class ListMain extends Activity implements View.OnClickListener {
 
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
         final View layout = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
+        empty = true;
 
         contactlist = new ArrayList<Map<String, String>>();
 
@@ -110,6 +112,9 @@ public class ListMain extends Activity implements View.OnClickListener {
                     EditText name = (EditText)layout.findViewById(R.id.customDlg_name);
                     String strId   = Id.getText().toString();
                     String strName = name.getText().toString();
+                    if(empty){
+                        contactlist.clear();
+                    }
                     Map<String, String> newLine = new HashMap<String, String>();
                     newLine.put("Name", strName);
                     newLine.put("ID", strId);
@@ -132,6 +137,7 @@ public class ListMain extends Activity implements View.OnClickListener {
             contactlist.clear();
             saveList();
             setMap();
+            empty = true;
 
         }
     }
@@ -167,12 +173,14 @@ public class ListMain extends Activity implements View.OnClickListener {
         if((gson.fromJson(savedNamesString, ArrayList.class)).isEmpty() == false){
             names = gson.fromJson(savedNamesString, ArrayList.class);
             ids = gson.fromJson(savedIdString, ArrayList.class);
+            empty = false;
         }
         contactlist.clear();
         for (int i = 0; i < names.size(); ++i)
         {
             Map<String, String> line = new HashMap<String, String>();
-            line.put(names.get(i), ids.get(i));
+            line.put("Name", names.get(i));
+            line.put("ID", ids.get(i));
             contactlist.add(line);
         }
     }
