@@ -2,23 +2,41 @@ package prgc.snct.sos.Activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.google.gson.Gson;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import prgc.snct.sos.R;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
-
+    boolean first;
+    String Id, Name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +51,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button button5 = (Button)findViewById(R.id.button5);
 
         //Button button6 = (Button)findViewById(R.id.button6);　chart(Mounting ly.)
-        //showDialog(1); name(Mounting ly.)
 
         Button button7 = (Button)findViewById(R.id.button7);
 
@@ -45,6 +62,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         button5.setOnClickListener(this);
         //button6.setOnClickListener(this);
         button7.setOnClickListener(this);
+
     }
 
     @Override
@@ -70,41 +88,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-
-            case 1:
-
-                //���C�A�E�g�̌Ăяo��
-                LayoutInflater factory = LayoutInflater.from(this);
-                final View inputView = factory.inflate(R.layout.input_dialog, null);
-
-                //�_�C�A���O�̍쐬(AlertDialog.Builder)
-                return new AlertDialog.Builder(MainActivity.this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("name")
-                    .setView(inputView)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-
-                    /* int whichButton �ɂ��A�����ꂽ�{�^���𔻒� */
-                    /* ��t���� �F���͂��ꂽ�e�L�X�g�̏����Ȃ� */
-                        }
-                    })
-
-                        .create();
-        }
-
-        return null;
-    }
-
-
-
-    @Override
     public void onClick(View v) {
         if(v.getId() == R.id.imageButton2){
 
-       //     Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            //     Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             Intent intent = new Intent(MainActivity.this, MapActivity2.class);
             startActivity(intent);
 
@@ -129,14 +116,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         else if(v.getId() == R.id.button5) {
 
             Intent intent = new Intent(MainActivity.this,ActivityService.class);
-            //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
             startActivity(intent);
 
         }
         else if(v.getId() == R.id.button6) {
 
             Intent intent = new Intent(MainActivity.this,ChartActivity.class);
-            //intent.setClassName("prgc.snct.sos.Activities", "prgc.snct.sos.Activities.DatabaseMain");
             startActivity(intent);
 
         }else if(v.getId() == R.id.button7) {

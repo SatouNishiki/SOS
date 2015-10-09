@@ -22,10 +22,10 @@ import prgc.snct.sos.R;
 public class TryService extends Service {
 
     private final static String TAG = "TryService#";
-    int oldscount=0;
+    int oldscount=0,oldlcount=0;
     int flag=0;
     Context con =this;
-    int scount;
+    int scount,lcount;
     double lat,lng,Latr,Lngr;
 
     private int mCount = 0;
@@ -67,18 +67,23 @@ public class TryService extends Service {
                             //showText("Service was bound.");
 
 
-                                scount=d.geter(lat,lng,Latr,Lngr);
-
+                                scount=d.geter(lat,lng,Latr,Lngr, con);
+                                d.lcount=lcount;
 
                             if(scount>oldscount&&flag==1) {
                                 sosLocation = d.getSosLocation();
                                 showNotification(TryService.this);
+
+                            }
+                            if(lcount>oldlcount&&flag==1)
+                            {
+                                showNotification2(TryService.this);
                             }
                             flag=1;
 
-                            if(oldscount<scount)
-                                oldscount=scount;
 
+                                oldscount=scount;
+                                oldlcount=lcount;
 
                         }
                     }
@@ -186,6 +191,31 @@ public class TryService extends Service {
         Notification n = new NotificationCompat.Builder(ctx)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setTicker("There is a rescue request person..")
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle("SOS")
+                .setContentText("When a tap is done, the location of the linchpin savior is indicated.")
+                .setContentIntent(contentIntent)
+                .build();
+        n.defaults |= Notification.DEFAULT_ALL;
+        n.flags = Notification.FLAG_NO_CLEAR;
+
+        mgr.notify(R.layout.activity_service, n);
+
+    }
+    private void showNotification2(final Context ctx) {
+
+        NotificationManager mgr = (NotificationManager)ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Intent intent = new Intent(ctx, ActivityService.class);
+        Intent intent = new Intent(ctx, MainActivity.class);
+
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+
+        Notification n = new NotificationCompat.Builder(ctx)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setTicker("There is a rescue request for List person..")
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle("SOS")
                 .setContentText("When a tap is done, the location of the linchpin savior is indicated.")

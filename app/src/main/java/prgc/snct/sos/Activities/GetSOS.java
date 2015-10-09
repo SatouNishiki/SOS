@@ -1,21 +1,25 @@
 package prgc.snct.sos.Activities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +32,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
     private static final String user = "snctprocon2015";
     private static final String pass = "kadai";
     double lat, lng, Lat1r, Lng1r, Latr, Lngr, Latrad, Lngrad;
-    public int scount = 0;
+    public int scount = 0, lcount = 0;
     int ret=0;
     int ct=0;
     private static final double a = 6378137.0;
@@ -39,11 +43,11 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
     static boolean get = false;
     private LocationManager locationManager;
     private static LatLng sosLocation;
+    List<String> names, ids;
 
     public GetSOS(Context con) {
 
         locationManager = (LocationManager)con.getSystemService(Context.LOCATION_SERVICE);
-
 
         Criteria crit = new Criteria();
         crit.setAccuracy(Criteria.ACCURACY_FINE);
@@ -64,9 +68,9 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
         Latr = 2/Lat1r;
         Lngr = 2/Lng1r;
     }
-    public int geter(final double lat, final double lng, final double Latr, final double Lngr){
+    public int geter(final double lat, final double lng, final double Latr, final double Lngr, final Context con){
 
-scount=0;
+        scount=0;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -75,8 +79,8 @@ scount=0;
 
                     Class.forName("com.mysql.jdbc.Driver"); // JDBC�h���C�o�����[�h
 
-                    Connection con = (Connection) DriverManager.getConnection(url, user, pass); // �T�[�o�ɐڑ�
-                    Statement st = (Statement) con.createStatement();
+                    Connection connection = (Connection) DriverManager.getConnection(url, user, pass); // �T�[�o�ɐڑ�
+                    Statement st = (Statement) connection.createStatement();
 
                     String SQL = "SELECT * from sos_stat";
                     ResultSet rs = st.executeQuery(SQL);
@@ -91,9 +95,19 @@ scount=0;
                         }
                     }
 
+                    loadList(con);
+                    for(int i = 0; i < names.size(); i++) {
+                        SQL = "SELECT * from sos_nlist where id = '" + ids.get(i) + "'";
+                        ResultSet rs2 = st.executeQuery(SQL);
+                        while(rs2.next()){
+                            lcount++;
+                        }
+                        rs2.close();
+                    }
+
                     rs.close();
                     st.close();
-                    con.close();
+                    connection.close();
                     if(scount > 0){
                         ret=scount;
                     }
@@ -152,5 +166,21 @@ while(ret==0)
 
     public LatLng getSosLocation(){
         return sosLocation;
+    }
+
+    public void loadList(Context con) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(con);
+        Gson gson = new Gson();
+        // 保存されているjson文字列を取得
+        String savedNamesString = prefs.getString("ARRAY_NAMES", "");
+        String savedIdString = prefs.getString("ARRAY_ID", "");
+
+        // json文字列をArrayListクラスのインスタンスに変換
+        names = new ArrayList<String>();
+        ids = new ArrayList<String>();
+        if ((gson.fromJson(savedNamesString, ArrayList.class)).isEmpty() == false) {
+            names = gson.fromJson(savedNamesString, ArrayList.class);
+            ids = gson.fromJson(savedIdString, ArrayList.class);
+        }
     }
 }
