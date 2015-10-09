@@ -120,6 +120,7 @@ public class ListMain extends Activity implements View.OnClickListener {
                     newLine.put("ID", strId);
                     contactlist.add(newLine);
                     saveList();
+                    empty = false;
                     setMap();
                 }
             });
@@ -156,16 +157,16 @@ public class ListMain extends Activity implements View.OnClickListener {
         String jsonNamesString = gson.toJson(names);
         String jsonIdString = gson.toJson(ids);
         // 変換後の文字列をputStringで保存
-        prefs.edit().putString("ARRAY_NAMES",jsonNamesString).apply();
-        prefs.edit().putString("ARRAY_ID",jsonIdString).apply();
+        prefs.edit().putString("ARR_NAMES",jsonNamesString).apply();
+        prefs.edit().putString("ARR_ID",jsonIdString).apply();
     }
 
     public void loadList(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
         // 保存されているjson文字列を取得
-        String savedNamesString = prefs.getString("ARRAY_NAMES", "");
-        String savedIdString = prefs.getString("ARRAY_ID", "");
+        String savedNamesString = prefs.getString("ARR_NAMES", "");
+        String savedIdString = prefs.getString("ARR_ID", "");
 
         // json文字列をArrayListクラスのインスタンスに変換
         List<String> names = new ArrayList<String>();
