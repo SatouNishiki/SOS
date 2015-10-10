@@ -39,7 +39,7 @@ import prgc.snct.sos.R;
 public class TopActivity extends ActionBarActivity implements View.OnClickListener{
 
     private GoogleApiClient client;
-    boolean first;
+    boolean first; //初回起動か判断する
     String Name, Id;
 
     @Override
@@ -58,11 +58,11 @@ public class TopActivity extends ActionBarActivity implements View.OnClickListen
 
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        Id = wifiInfo.getMacAddress();
+        Id = wifiInfo.getMacAddress(); //Macアドレス取得
 
         loadData();
 
-        if(first) {
+        if(first) { //初回起動時
             initList();
             showDialog(1);
         }
@@ -152,8 +152,11 @@ public class TopActivity extends ActionBarActivity implements View.OnClickListen
                     }
                 });
 
+                AlertDialog dia = builder.create();
+                // ダイアログの外をタッチしても消えないようにする
+                dia.setCanceledOnTouchOutside(false);
                 // 表示
-                builder.create().show();
+                dia.show();
         }
 
         return null;
@@ -174,13 +177,13 @@ public class TopActivity extends ActionBarActivity implements View.OnClickListen
     public void saveData(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // putBooleanで保存
-        prefs.edit().putBoolean("WhichFirst",first).apply();
+        prefs.edit().putBoolean("First",first).apply();
     }
 
     public void loadData(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // getBooleanで取得
-        first = prefs.getBoolean("WhichFirs", true);
+        first = prefs.getBoolean("First", true);
     }
 
 }
