@@ -268,10 +268,10 @@ public class MapActivity2 extends FragmentActivity implements LocationListener, 
             gMap.clear();
 
             LatLng here = new LatLng(location.getLatitude(), location.getLongitude());
-            LatLng sosLatLng = new LatLng(intent.getDoubleExtra("latitude", 0), intent.getDoubleExtra("longitude", 0));
-
-            Log.v("MapActivity2", "Lat = " + new Double(sosLatLng.latitude).toString());
-            Log.v("MapActivity2", "Lng = " + new Double(sosLatLng.longitude).toString());
+           // LatLng sosLatLng = new LatLng(intent.getDoubleExtra("latitude", 0), intent.getDoubleExtra("longitude", 0));
+LatLng sosLatLng = new LatLng(here.latitude+0.01,here.longitude+0.01);
+           /* Log.v("MapActivity2", "Lat = " + new Double(sosLatLng.latitude).toString());
+            Log.v("MapActivity2", "Lng = " + new Double(sosLatLng.longitude).toString());*/
 
             if (markerPoints.size()>1){
                 markerPoints.clear();
