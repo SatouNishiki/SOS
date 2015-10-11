@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import prgc.snct.sos.R;
 
 /**
@@ -31,6 +33,7 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
     Camera c = Camera.open();
     AudioManager am ;
     int ringVolume;
+    boolean light=false,voice=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +91,7 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
 
         b6.setOnClickListener(this);
 
-
+        TextView textView1 = (TextView)findViewById(R.id.vonLL);
     }
 
     @Override
@@ -102,12 +105,22 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
 
         switch (v.getId()) {
             case R.id.vonLL:
-                int ringMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                if(voice==false) {
+                    voice=true;
+                    int ringMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
 
-                // 音量を設定する
-                am.setStreamVolume(AudioManager.STREAM_MUSIC, ringMaxVolume, 0);
-                mp.start();
+                    // 音量を設定する
+                    am.setStreamVolume(AudioManager.STREAM_MUSIC, ringMaxVolume, 0);
+                    mp.start();
+                }
+                else
+                {
+                    voice=false;
+                    am.setStreamVolume(AudioManager.STREAM_MUSIC, ringVolume, 0);
+                    mp.pause();
+                    mp.seekTo(0);
+                }
                 break;
             case R.id.voffLL:
                 am.setStreamVolume(AudioManager.STREAM_MUSIC, ringVolume, 0);

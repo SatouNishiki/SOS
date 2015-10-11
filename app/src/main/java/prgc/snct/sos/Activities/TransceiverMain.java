@@ -49,7 +49,7 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
     private static final double PI = 3.1415926536;
 
     static boolean get = false;
-
+    final Handler handler = new Handler();
     private static final String url = "jdbc:mysql://160.16.91.195:3306/sos_db";
     private static final String user = "snctprocon2015";
     private static final String pass = "kadai";
@@ -73,12 +73,12 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transceiver_main);
 
-        button5 = (Button)findViewById(R.id.button5);
-        Button button6 = (Button)findViewById(R.id.button6);
+        //button5 = (Button)findViewById(R.id.button5);
+        //Button button6 = (Button)findViewById(R.id.button6);
         textView1 = (TextView)findViewById(R.id.textView);
 
-        button5.setOnClickListener(this);
-        button6.setOnClickListener(this);
+        //button5.setOnClickListener(this);
+        //button6.setOnClickListener(this);
 
         locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
         locationManager.addGpsStatusListener(this);
@@ -90,14 +90,65 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
 
         Intent intent = getIntent();
 
-        if(intent != null){
+        /*if(intent != null){
              boolean autoClick = intent.getBooleanExtra("AutoClick", false);
 
             if(autoClick){
                 isIntent = true;
             }
         }
+        */
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
+                try {
+
+                    String Message = "NULL";
+                    String Status = "NULL";
+
+                    WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+                    WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                    Id = wifiInfo.getMacAddress();
+
+                    Date d = new Date();
+                    String date = d.toString();
+
+                    Class.forName("com.mysql.jdbc.Driver"); // JDBCドライバをロード
+
+                    Connection con = (Connection) DriverManager.getConnection(url, user, pass); // サーバに接続
+                    Statement st = (Statement) con.createStatement();
+
+                    String SQL = "INSERT INTO `sos_stat` VALUES ('" + Id + "', '" + Message + "', '" + Status + "', " + lat + ", " + lng + ", cast(now() as datetime))";
+
+                    Log.v("TraansceiverMain","Send Lat = " +  new Double(lat).toString());
+                    Log.v("TraansceiverMain", "Send Lng = " + new Double(lng).toString());
+                    st.executeUpdate(SQL);
+
+                    st.close();
+                    con.close();
+
+                    //result = "lat = " + String.valueOf(lat) + ", lng = " + String.valueOf(lng);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    result = e.toString();
+                }
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        textView1.setText("Send SOS.");
+
+
+                        Intent intent = new Intent(TransceiverMain.this, WaitRescueActivity.class);
+                        startActivity(intent);
+
+
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override
@@ -117,62 +168,12 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
     @Override
     public void onClick(View v) {
 
-        final Handler handler = new Handler();
 
-        if(get == true) {
+
+        /*if(get == true) {
             if (v.getId() == R.id.button5) { //データを送信
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
 
-                        try {
-
-                            String Message = "NULL";
-                            String Status = "NULL";
-
-                            WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-                            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                            Id = wifiInfo.getMacAddress();
-
-                            Date d = new Date();
-                            String date = d.toString();
-
-                            Class.forName("com.mysql.jdbc.Driver"); // JDBCドライバをロード
-
-                            Connection con = (Connection) DriverManager.getConnection(url, user, pass); // サーバに接続
-                            Statement st = (Statement) con.createStatement();
-
-                            String SQL = "INSERT INTO `sos_stat` VALUES ('" + Id + "', '" + Message + "', '" + Status + "', " + lat + ", " + lng + ", cast(now() as datetime))";
-
-                            Log.v("TraansceiverMain","Send Lat = " +  new Double(lat).toString());
-                            Log.v("TraansceiverMain", "Send Lng = " + new Double(lng).toString());
-                            st.executeUpdate(SQL);
-
-                            st.close();
-                            con.close();
-
-                            //result = "lat = " + String.valueOf(lat) + ", lng = " + String.valueOf(lng);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            result = e.toString();
-                        }
-
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                textView1.setText("Send SOS.");
-
-
-                                Intent intent = new Intent(TransceiverMain.this, WaitRescueActivity.class);
-                                startActivity(intent);
-
-
-                            }
-                        });
-                    }
-                }).start();
 
             }else if(v.getId() == R.id.button6){ //データを受信
 
@@ -223,8 +224,9 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
             }
         }else{
             textView1.setText("Haven't got Location yet.");
-        }
+        }*/
     }
+
 
     @Override
     public void onLocationChanged(Location location) {
@@ -240,10 +242,10 @@ public class TransceiverMain extends ActionBarActivity implements LocationListen
 
         Log.v("TraansceiverMain","Get Lat = " +  new Double(lat).toString());
         Log.v("TraansceiverMain", "Get Lng = " + new Double(lng).toString());
-        if(canSend) {
+        /*if(canSend) {
             button5.performClick();
             canSend = false;
-        }
+        }*/
     }
 
     @Override
