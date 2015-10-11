@@ -55,9 +55,11 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
 
         Location loc = locationManager.getLastKnownLocation(provider);
 
-        lat = loc.getLatitude();
-        lng = loc.getLongitude();
-
+    	if(loc != null){
+            lat = loc.getLatitude();
+            lng = loc.getLongitude();
+    	}	
+        
         while(lat==0.0)
         {
 
@@ -122,7 +124,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
 
             }
         }).start();
-        while(ct<1000000000)
+        while(ct<100000000)
         {
             ct++;
         }
