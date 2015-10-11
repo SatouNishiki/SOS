@@ -4,26 +4,28 @@
     android:layout_height="match_parent">
     <Button
         android:id="@+id/vonLL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="voiceOn"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:text="音を鳴らす"
         >
     </Button>
-    <Button
-        android:id="@+id/voffLL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="voiceOff"
-        android:layout_below="@+id/vonLL" >
-    </Button>
+    <!--<Button
+    android:id="@+id/voffLL"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="voiceOff"
+    android:layout_below="@+id/vonLL" >
+</Button>
+-->
     <Button
         android:id="@+id/lonLL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lightOn"
-        android:layout_below="@+id/voffLL"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:text="光を点ける"
+        android:layout_below="@+id/vonLL"
         >
     </Button>
+    <!--
     <Button
         android:id="@+id/loffLL"
         android:layout_width="wrap_content"
@@ -31,19 +33,21 @@
         android:text="lightOff"
         android:layout_below="@+id/lonLL" >
     </Button>
+    -->
     <Button
         android:id="@+id/Ambulance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
         android:text="119番通報"
         android:layout_below="@+id/loffLL" >
     </Button>
-    <Button
+    <!--<Button
         android:id="@+id/comres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Completion"
         android:layout_below="@+id/Ambulance" >
     </Button>
+    -->
 
 </LinearLayout>

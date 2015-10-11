@@ -34,6 +34,7 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
     AudioManager am ;
     int ringVolume;
     boolean light=false,voice=false;
+    TextView textView1,textView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,28 +71,29 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
         mp.setVolume(1.0f, 1.0f);
 
         b1=(Button)findViewById(R.id.vonLL);
-        b2=(Button)findViewById(R.id.voffLL);
+        //b2=(Button)findViewById(R.id.voffLL);
 
         b1.setOnClickListener(this);
-        b2.setOnClickListener(this);
+        //b2.setOnClickListener(this);
 
         b3=(Button)findViewById(R.id.lonLL);
-        b4=(Button)findViewById(R.id.loffLL);
+        //b4=(Button)findViewById(R.id.loffLL);
 
         b3.setOnClickListener(this);
-        b4.setOnClickListener(this);
+        //b4.setOnClickListener(this);
 
 
         b5=(Button)findViewById(R.id.Ambulance);
 
 
         b5.setOnClickListener(this);
-        b6=(Button)findViewById(R.id.comres);
+        //b6=(Button)findViewById(R.id.comres);
 
 
-        b6.setOnClickListener(this);
+        //b6.setOnClickListener(this);
 
-        TextView textView1 = (TextView)findViewById(R.id.vonLL);
+         textView1 = (TextView)findViewById(R.id.vonLL);
+        textView2 = (TextView)findViewById(R.id.lonLL);
     }
 
     @Override
@@ -107,6 +109,7 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
             case R.id.vonLL:
                 if(voice==false) {
                     voice=true;
+                    textView1.setText("音を消す");
                     int ringMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
 
@@ -116,27 +119,46 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
                 }
                 else
                 {
+
                     voice=false;
+                    textView1.setText("音を鳴らす");
                     am.setStreamVolume(AudioManager.STREAM_MUSIC, ringVolume, 0);
                     mp.pause();
                     mp.seekTo(0);
                 }
                 break;
-            case R.id.voffLL:
+            /*case R.id.voffLL:
                 am.setStreamVolume(AudioManager.STREAM_MUSIC, ringVolume, 0);
                 mp.pause();
                 mp.seekTo(0);
                 break;
+                */
             case R.id.lonLL:
-                Camera.Parameters cp = c.getParameters();
+                if(light==false) {
+                    light=true;
+                    textView2.setText("光を消す");
+                    Camera.Parameters cp = c.getParameters();
 //フラッシュモードを"常に点灯"に設定（Android OS Verに依存？）
-                cp.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                    cp.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
 //パラメータを設定
-                c.setParameters(cp);
+                    c.setParameters(cp);
+//プレビューをしないと光らない
+                    c.startPreview();
+                }
+                else
+            {
+                light=false;
+                textView2.setText("光を点ける");
+                Camera.Parameters cp2 = c.getParameters();
+//フラッシュモードを"常に点灯"に設定（Android OS Verに依存？）
+                cp2.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+//パラメータを設定
+                c.setParameters(cp2);
 //プレビューをしないと光らない
                 c.startPreview();
+            }
                 break;
-            case R.id.loffLL:
+            /*case R.id.loffLL:
                 Camera.Parameters cp2 = c.getParameters();
 //フラッシュモードを"常に点灯"に設定（Android OS Verに依存？）
                 cp2.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
@@ -145,13 +167,14 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
 //プレビューをしないと光らない
                 c.startPreview();
                 break;
+                */
             case R.id.Ambulance:
                 Uri uri = Uri.parse("tel:119");
                 Intent i = new Intent(Intent.ACTION_DIAL,uri);
                 startActivity(i);
                 break;
-            case R.id.comres:
-                break;
+            //case R.id.comres:
+                //break;
 
         }
     }
