@@ -94,6 +94,9 @@ public class WaitRescueActivity extends ActionBarActivity implements View.OnClic
 
          textView1 = (TextView)findViewById(R.id.vonLL);
         textView2 = (TextView)findViewById(R.id.lonLL);
+
+        b1.performClick();
+        b2.performClick();
     }
 
     @Override
