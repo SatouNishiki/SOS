@@ -14,41 +14,45 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true" />
 
-    <ImageButton
+    <!--<ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton2"
         android:background="@drawable/mapbutton_state"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" /> -->
 
-    <ImageButton
+    <!--<ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton3"
         android:background="@drawable/bluetoothbutton_state"
         android:layout_below="@+id/imageButton2"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="45dp" /> -->
 
-    <ImageButton
+   <!-- <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton4"
         android:background="@drawable/databasebutton_state"
         android:layout_below="@+id/imageButton3"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="45dp" /> -->
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Transceiver Main"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:background="#ffffff"
+        android:text="HELP\n(救助要請を\n発信します)"
+        android:textSize="50sp"
+
+
         android:id="@+id/button4"
-        android:layout_below="@+id/imageButton4"
+
         android:layout_alignParentStart="true"
         android:layout_marginTop="43dp" />
-    <Button
+   <!-- <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="callMain"
@@ -72,6 +76,19 @@
         android:text="List Main"
         android:id="@+id/button7"
         android:layout_below="@+id/button6"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" /> -->
+
+    <Button
+    android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+    android:text="その他"
+
+
+        android:id="@+id/button5"
+    android:layout_below="@+id/button4"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="41dp" />
+
 
 </RelativeLayout>
