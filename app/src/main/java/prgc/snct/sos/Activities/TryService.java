@@ -51,7 +51,7 @@ public class TryService extends Service {
             while (mThreadActive) {
 
                 try {
-                    Thread.sleep(20000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
 
                     e.printStackTrace();
