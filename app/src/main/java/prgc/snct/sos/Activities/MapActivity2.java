@@ -18,6 +18,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -40,11 +41,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import android.app.ProgressDialog;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import prgc.snct.sos.R;
 
-public class MapActivity2 extends FragmentActivity implements LocationListener, GpsStatus.Listener {
+public class MapActivity2 extends FragmentActivity implements LocationListener, GpsStatus.Listener, View.OnClickListener {
 
     GoogleMap gMap;
     private static final int MENU_A = 0;
@@ -64,6 +67,8 @@ public class MapActivity2 extends FragmentActivity implements LocationListener, 
 
     private LocationManager locationManager;
 
+    LatLng curr = new LatLng(0,0);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +81,9 @@ public class MapActivity2 extends FragmentActivity implements LocationListener, 
         for (String provider : providers) {
             locationManager.requestLocationUpdates(provider, 3000, 10, this);
         }
+
+        Button button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(this);
 
         //プログレス
         progressDialog = new ProgressDialog(this);
@@ -402,6 +410,18 @@ public class MapActivity2 extends FragmentActivity implements LocationListener, 
     @Override
     public void onGpsStatusChanged(int event) {
 
+    }
+
+    public void onClick(View v) {
+        if(v.getId() == R.id.button) {
+
+            double a=curr.latitude;
+            double b=curr.longitude;
+            Uri uri = Uri.parse("https://www.google.co.jp/maps/search/%E7%97%85%E9%99%A2/@"+a+","+b+"z/data=!3m1!4b1");
+            Intent i = new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(i);
+
+        }
     }
 
 
