@@ -57,6 +57,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
 
         lat = loc.getLatitude();
         lng = loc.getLongitude();
+
         while(lat==0.0)
         {
 
@@ -71,6 +72,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
     public int geter(final double lat, final double lng, final double Latr, final double Lngr, final Context con){
 
         scount=0;
+        ct=0;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -95,7 +97,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
                         }
                     }
 
-                    loadList(con);
+                    /*loadList(con);
                     for(int i = 0; i < names.size(); i++) {
                         SQL = "SELECT * from sos_nlist where id = '" + ids.get(i) + "'";
                         ResultSet rs2 = st.executeQuery(SQL);
@@ -104,7 +106,7 @@ public class GetSOS implements LocationListener, GpsStatus.Listener{
                         }
                         rs2.close();
                     }
-
+*/
                     rs.close();
                     st.close();
                     connection.close();
@@ -168,7 +170,7 @@ while(ret==0)
         return sosLocation;
     }
 
-    public void loadList(Context con) {
+    /*public void loadList(Context con) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(con);
         Gson gson = new Gson();
         // 保存されているjson文字列を取得
@@ -183,4 +185,5 @@ while(ret==0)
             ids = gson.fromJson(savedIdString, ArrayList.class);
         }
     }
+    */
 }

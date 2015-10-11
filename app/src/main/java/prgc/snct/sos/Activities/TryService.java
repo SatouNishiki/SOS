@@ -51,7 +51,7 @@ public class TryService extends Service {
             while (mThreadActive) {
 
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(20000);
                 } catch (InterruptedException e) {
 
                     e.printStackTrace();
@@ -68,23 +68,24 @@ public class TryService extends Service {
 
 
                                 scount=d.geter(lat,lng,Latr,Lngr, con);
-                                d.lcount=lcount;
+                                //lcount=d.lcount;
 
                             if(scount>oldscount&&flag==1) {
                                 sosLocation = d.getSosLocation();
                                 showNotification(TryService.this);
 
                             }
-                            if(lcount>oldlcount&&flag==1)
+                           /* if(lcount>oldlcount&&flag==1)
                             {
                                 showNotification2(TryService.this);
                             }
+                            */
                             flag=1;
 
 
                                 oldscount=scount;
-                                oldlcount=lcount;
-
+                                //oldlcount=lcount;
+                            showText("Service was bound."+scount);
                         }
                     }
                 });
